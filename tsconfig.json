@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /*  Folder structure */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /*  Compilation settings */
+    "target": "ES2020",               // good balance for Node.js support
+    "module": "CommonJS",             // required for Node.js
+    "lib": ["ES2020"],
+    "types": ["node"],                // so TypeScript knows Node globals like 'process', 'fs', etc.
+    
+    /*  Output */
+    "sourceMap": true,
+    "declaration": false,             // optional; set to true only if publishing a library
+
+    /*  Strictness */
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /*  Speed / Compatibility */
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}

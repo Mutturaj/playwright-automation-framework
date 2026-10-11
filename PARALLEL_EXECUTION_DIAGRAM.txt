@@ -1,0 +1,170 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                     PARALLEL EXECUTION ARCHITECTURE                             ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  Command: npm run test:parallel                                              │
+│  Workers: 4 (can run 4 tests simultaneously)                                 │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+                            ┌─────────────────┐
+                            │  dataset.json   │
+                            │  3 Users:       │
+                            │  - Muttu        │
+                            │  - Bindu        │
+                            │  - Raju         │
+                            └────────┬────────┘
+                                     │
+                    ┌────────────────┴────────────────┐
+                    │   JobApplication.spec.js        │
+                    │   Creates 6 test suites:        │
+                    │   - 3 LinkedIn (one per user)   │
+                    │   - 3 Naukri (one per user)     │
+                    └────────────────┬────────────────┘
+                                     │
+        ┌────────────────────────────┼────────────────────────────┐
+        │                            │                            │
+   ┌────▼─────┐                ┌────▼─────┐                ┌────▼─────┐
+   │ Worker 1 │                │ Worker 2 │                │ Worker 3 │
+   └────┬─────┘                └────┬─────┘                └────┬─────┘
+        │                            │                            │
+        │                            │                            │
+┌───────▼───────────┐      ┌────────▼────────────┐    ┌──────────▼──────────┐
+│  Browser Context 1│      │  Browser Context 2  │    │  Browser Context 3  │
+│                   │      │                     │    │                     │
+│  LinkedIn - Muttu │      │  Naukri - Muttu     │    │  LinkedIn - Bindu   │
+│                   │      │                     │    │                     │
+│  ┌─────────────┐ │      │  ┌───────────────┐  │    │  ┌───────────────┐  │
+│  │   Chrome    │ │      │  │    Chrome     │  │    │  │    Chrome     │  │
+│  │  Instance 1 │ │      │  │   Instance 2  │  │    │  │   Instance 3  │  │
+│  │             │ │      │  │               │  │    │  │               │  │
+│  │ 1. Login    │ │      │  │ 1. Login      │  │    │  │ 1. Login      │  │
+│  │ 2. Search   │ │      │  │ 2. Update     │  │    │  │ 2. Search     │  │
+│  │ 3. Apply    │ │      │  │ 3. Apply Jobs │  │    │  │ 3. Apply      │  │
+│  │ 4. Logout   │ │      │  │               │  │    │  │ 4. Logout     │  │
+│  └─────────────┘ │      │  └───────────────┘  │    │  └───────────────┘  │
+└───────────────────┘      └─────────────────────┘    └─────────────────────┘
+        │                            │                            │
+        │                            │                            │
+   ┌────▼─────┐                ┌────▼─────┐                ┌────▼─────┐
+   │ Worker 4 │                │ Worker 1 │                │ Worker 2 │
+   └────┬─────┘                └────┬─────┘                └────┬─────┘
+        │                            │                            │
+┌───────▼───────────┐      ┌────────▼────────────┐              │
+│  Browser Context 4│      │  Browser Context 5  │              │
+│                   │      │                     │              │
+│  Naukri - Bindu   │      │  LinkedIn - Raju    │             ...
+│                   │      │                     │
+│  ┌─────────────┐ │      │  ┌───────────────┐  │
+│  │   Chrome    │ │      │  │    Chrome     │  │
+│  │  Instance 4 │ │      │  │   Instance 5  │  │
+│  │             │ │      │  │               │  │
+│  │ 1. Login    │ │      │  │ 1. Login      │  │
+│  │ 2. Update   │ │      │  │ 2. Search     │  │
+│  │ 3. Apply    │ │      │  │ 3. Apply      │  │
+│  └─────────────┘ │      │  │ 4. Logout     │  │
+└───────────────────┘      │  └───────────────┘  │
+                           └─────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                            TIMELINE VIEW                                        ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+Time →  0s      15s      30s      45s      60s      75s      90s     105s
+        │        │        │        │        │        │        │        │
+Muttu   ├────────LinkedIn (Login → Search → Apply → Logout)────────────┤
+LinkedIn│        │        │        │        │        │        │        │
+        │        │        │        │        │        │        │        │
+Muttu   ├──────Naukri (Login → Update → Apply Jobs)──────────┤
+Naukri  │        │        │        │        │        │        │
+        │        │        │        │        │        │        │
+Bindu   │        ├────────LinkedIn (Login → Search → Apply)───────────┤
+LinkedIn│        │        │        │        │        │        │        │
+        │        │        │        │        │        │        │        │
+Bindu   │        ├──────Naukri (Login → Update → Apply)───────┤
+Naukri  │        │        │        │        │        │        │
+        │        │        │        │        │        │        │
+Raju    │        │        ├────────LinkedIn (Login → Search → Apply)───┤
+LinkedIn│        │        │        │        │        │        │        │
+        │        │        │        │        │        │        │        │
+Raju    │        │        ├──────Naukri (Login → Update)──────┤
+Naukri  │        │        │        │        │        │        │
+        └────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+
+        ◄─────── ALL RUNNING IN PARALLEL (4 tests at any time) ────────►
+
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                         KEY BENEFITS                                            ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+✓ SPEED: 3 users × 2 platforms = 6 tests run in ~25-30 minutes
+          (Sequential would take 90+ minutes)
+
+✓ ISOLATION: Each test runs in separate browser context
+             No interference between tests
+
+✓ EFFICIENCY: While LinkedIn is searching jobs for Muttu,
+              Naukri is applying jobs for Muttu at the same time
+
+✓ SCALABILITY: Add more users → More tests run in parallel
+               (limited only by your machine's resources)
+
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                         EXECUTION MODES                                         ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Mode 1: Full Parallel (Recommended)                                        │
+│ Command: npm run test:parallel                                             │
+│                                                                             │
+│ Workers: 4                                                                  │
+│ Result: LinkedIn and Naukri run simultaneously for each user               │
+│ Time: 25-30 minutes for 3 users                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Mode 2: Maximum Parallel                                                   │
+│ Command: npm run test:parallel:max                                         │
+│                                                                             │
+│ Workers: 8                                                                  │
+│ Result: More tests run simultaneously (if you have many users)             │
+│ Time: 20-25 minutes for 3 users                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Mode 3: Headed Mode (Debugging)                                            │
+│ Command: npm run test:headed:all                                           │
+│                                                                             │
+│ Workers: 2                                                                  │
+│ Result: See 2 browser windows (LinkedIn + Naukri) in action                │
+│ Time: Slower, but you can watch what's happening                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Mode 4: Single Platform                                                    │
+│ Command: npm run test:linkedin  OR  npm run test:naukri                    │
+│                                                                             │
+│ Workers: Configured in playwright.config.js                                │
+│ Result: Only LinkedIn OR only Naukri runs for all users                    │
+│ Time: ~15 minutes for 3 users (one platform only)                          │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                         RESOURCE USAGE                                          ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+Each browser instance uses approximately:
+- RAM: 200-300 MB
+- CPU: 5-10% per instance
+
+With 4 workers running simultaneously:
+- RAM: 800-1200 MB total
+- CPU: 20-40% total
+
+Recommended System Requirements:
+- Minimum: 4GB RAM, 2-core CPU → Use 2 workers
+- Recommended: 8GB RAM, 4-core CPU → Use 4 workers
+- Optimal: 16GB+ RAM, 8+ core CPU → Use 8 workers

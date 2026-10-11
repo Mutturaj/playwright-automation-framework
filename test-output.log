@@ -1,0 +1,56 @@
+
+Running 1 test using 1 worker
+
+Initialized 39 question-answer mappings for Muttu
+Network idle timeout, continuing...
+
+=== Starting LinkedIn Login ===
+Attempting to login with email: mutturaja1996@gmail.com
+Looking for email field...
+Email field error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[type="text"]:visible, input[name="session_key"]:visible, #username:visible').first() to be visible[22m
+
+
+=== DEBUG INFO ON ERROR ===
+Current URL: https://www.linkedin.com/login/?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Ffeed%2F%3Ftrk%3Dhomepage-basic_sign-in-submit
+Page Title: LinkedIn Login, Sign in | LinkedIn
+  x  1 [chromium] › tests\JobApplication.spec.js:41:9 › LinkedIn - Muttu › Muttu - LinkedIn Login and Search Jobs (1.7m)
+[31mTesting stopped early after 1 maximum allowed failures.[39m
+
+
+  1) [chromium] › tests\JobApplication.spec.js:41:9 › LinkedIn - Muttu › Muttu - LinkedIn Login and Search Jobs 
+
+    Error: Login failed: ERROR: Could not fill email field
+
+       at ..\src\pages\LinkedinPage.js:113
+
+      111 |             await this.page.screenshot({ path: 'screenshots/login-error.png' }).catch(() => {});
+      112 |
+    > 113 |             throw new Error(`Login failed: ${error.message}`);
+          |                   ^
+      114 |         }
+      115 |     }
+      116 |
+        at LinkedinPage.loginToLinkedIn (C:\Projects\PracticeJavascript\src\pages\LinkedinPage.js:113:19)
+        at C:\Projects\PracticeJavascript\tests\JobApplication.spec.js:42:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\JobApplication-LinkedIn----193a2-kedIn-Login-and-Search-Jobs-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\JobApplication-LinkedIn----193a2-kedIn-Login-and-Search-Jobs-chromium\error-context.md
+
+    Error Context: test-results\JobApplication-LinkedIn----193a2-kedIn-Login-and-Search-Jobs-chromium\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\JobApplication-LinkedIn----193a2-kedIn-Login-and-Search-Jobs-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\JobApplication-LinkedIn----193a2-kedIn-Login-and-Search-Jobs-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\JobApplication.spec.js:41:9 › LinkedIn - Muttu › Muttu - LinkedIn Login and Search Jobs 
+  1 error was not a part of any test, see above for details
