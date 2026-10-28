@@ -29,8 +29,10 @@ test("Sample Test", async ({ page }) => {
   await page.on('dialog', async dialog => {   
     dialog.dismiss(); // Dismiss the alert
   });
-  await page.click("//a[@aria-label='LinkedIn']");
-  await page.waitForTimeout(2000);
+ 
   await page.locator("//a[@aria-label='LinkedIn']").fill('https://www.linkedin.com/company/flipkart/');
+await page.screenshot
+({ path: "screenshot.png" });
+
 
 });

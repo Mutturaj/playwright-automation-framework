@@ -84,7 +84,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 75740,
+                  "duration": 62415,
                   "error": {
                     "message": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n",
                     "stack": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:32:14",
@@ -93,7 +93,7 @@
                       "column": 14,
                       "line": 32
                     },
-                    "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m     dialog\u001b[33m.\u001b[39mdismiss()\u001b[33m;\u001b[39m \u001b[90m// Dismiss the alert\u001b[39m\n \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m page\u001b[33m.\u001b[39m\n \u001b[90m 35 |\u001b[39m\u001b[0m"
+                    "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m     dialog\u001b[33m.\u001b[39mdismiss()\u001b[33m;\u001b[39m \u001b[90m// Dismiss the alert\u001b[39m\n \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'https://www.linkedin.com/company/flipkart/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m\u001b[0m"
                   },
                   "errors": [
                     {
@@ -102,7 +102,7 @@
                         "column": 14,
                         "line": 32
                       },
-                      "message": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n\n\u001b[0m \u001b[90m 30 |\u001b[39m     dialog\u001b[33m.\u001b[39mdismiss()\u001b[33m;\u001b[39m \u001b[90m// Dismiss the alert\u001b[39m\n \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m page\u001b[33m.\u001b[39m\n \u001b[90m 35 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:32:14\u001b[22m"
+                      "message": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n\n\u001b[0m \u001b[90m 30 |\u001b[39m     dialog\u001b[33m.\u001b[39mdismiss()\u001b[33m;\u001b[39m \u001b[90m// Dismiss the alert\u001b[39m\n \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'https://www.linkedin.com/company/flipkart/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 35 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:32:14\u001b[22m"
                     }
                   ],
                   "stdout": [
@@ -112,7 +112,7 @@
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T02:05:58.817Z",
+                  "startTime": "2026-10-28T02:30:46.848Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -146,8 +146,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-20T02:05:56.533Z",
-    "duration": 80655.164,
+    "startTime": "2026-10-28T02:30:45.362Z",
+    "duration": 65189.48800000036,
     "expected": 0,
     "skipped": 0,
     "unexpected": 1,
