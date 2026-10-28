@@ -70,7 +70,7 @@
       "specs": [
         {
           "title": "Sample Test",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -81,11 +81,30 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 13,
+                  "workerIndex": 0,
                   "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 30334,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 75740,
+                  "error": {
+                    "message": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n",
+                    "stack": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:32:14",
+                    "location": {
+                      "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
+                      "column": 14,
+                      "line": 32
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 30 |\u001b[39m     dialog\u001b[33m.\u001b[39mdismiss()\u001b[33m;\u001b[39m \u001b[90m// Dismiss the alert\u001b[39m\n \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m page\u001b[33m.\u001b[39m\n \u001b[90m 35 |\u001b[39m\u001b[0m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
+                        "column": 14,
+                        "line": 32
+                      },
+                      "message": "TimeoutError: page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n\n\u001b[0m \u001b[90m 30 |\u001b[39m     dialog\u001b[33m.\u001b[39mdismiss()\u001b[33m;\u001b[39m \u001b[90m// Dismiss the alert\u001b[39m\n \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mclick(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m page\u001b[33m.\u001b[39m\n \u001b[90m 35 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:32:14\u001b[22m"
+                    }
+                  ],
                   "stdout": [
                     {
                       "text": "This is a sample test\n"
@@ -93,12 +112,28 @@
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-26T01:40:27.523Z",
+                  "startTime": "2026-10-20T02:05:58.817Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
+                    "column": 14,
+                    "line": 32
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a82b13b7c3b1c0abddfd-a5ef85f82edae480536b",
@@ -111,11 +146,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-26T01:40:26.060Z",
-    "duration": 31875.41299999971,
-    "expected": 1,
+    "startTime": "2026-10-20T02:05:56.533Z",
+    "duration": 80655.164,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }

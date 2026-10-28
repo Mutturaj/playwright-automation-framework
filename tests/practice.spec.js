@@ -31,6 +31,6 @@ test("Sample Test", async ({ page }) => {
   });
   await page.click("//a[@aria-label='LinkedIn']");
   await page.waitForTimeout(2000);
-
+  await page.locator("//a[@aria-label='LinkedIn']").fill('https://www.linkedin.com/company/flipkart/');
 
 });
