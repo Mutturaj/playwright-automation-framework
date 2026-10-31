@@ -143,6 +143,22 @@ Welcome! This comprehensive guide covers everything you need to master Playwrigh
   - Handle popups
   - Real-world tab scenarios
 
+### 14. **Fixtures** (`14-fixtures/`) ⭐⭐⭐
+- [01-fixtures-basics.spec.ts](./14-fixtures/01-fixtures-basics.spec.ts)
+  - Built-in fixtures (page, context, browser, request)
+  - Create custom fixtures
+  - Test data fixtures
+  - Authenticated page fixtures
+  - Page Object Model as fixtures
+  - Worker-scoped fixtures
+- [02-advanced-fixtures.spec.ts](./14-fixtures/02-advanced-fixtures.spec.ts)
+  - Database connection fixtures
+  - Auto-screenshot fixtures
+  - Mock API fixtures
+  - Performance measurement fixtures
+  - Environment config fixtures
+  - Dependency injection
+
 ---
 
 ## 🚀 Getting Started

@@ -262,6 +262,63 @@ test.afterAll(async () => {
 
 ---
 
+## 🧩 Fixtures
+
+```typescript
+// Built-in fixtures
+test('Use page fixture', async ({ page, context, browser, request }) => {
+  // page, context, browser, request are built-in fixtures
+  await page.goto('https://example.com');
+});
+
+// Custom fixture
+import { test as base } from '@playwright/test';
+
+type MyFixtures = {
+  todoPage: any;
+};
+
+const test = base.extend<MyFixtures>({
+  todoPage: async ({ page }, use) => {
+    // Setup
+    await page.goto('https://demo.playwright.dev/todomvc');
+    
+    // Use
+    await use(page);
+    
+    // Teardown (runs even if test fails)
+    console.log('Cleanup');
+  },
+});
+
+// Use custom fixture
+test('Add todo', async ({ todoPage }) => {
+  // todoPage is already at TodoMVC!
+  await todoPage.locator('.new-todo').fill('Task');
+  await todoPage.locator('.new-todo').press('Enter');
+});
+
+// Worker-scoped fixture (shared across tests)
+const test = base.extend<{}, WorkerFixtures>({
+  workerData: [async ({}, use) => {
+    // Setup once per worker
+    const data = await loadExpensiveData();
+    await use(data);
+    // Teardown once per worker
+  }, { scope: 'worker' }],
+});
+
+// Auto fixture (runs for every test automatically)
+const test = base.extend<AutoFixtures>({
+  autoLog: [async ({}, use, testInfo) => {
+    await use();
+    console.log('Test:', testInfo.title, 'Status:', testInfo.status);
+  }, { auto: true }],
+});
+```
+
+---
+
 ## 🚨 Dialogs & Alerts
 
 ```typescript

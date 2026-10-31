@@ -352,7 +352,7 @@ test.describe('Real-World Scroll Scenarios', () => {
           </script>
         </body>
       </html>
-    `);
+    `);     
 
     // Scroll to trigger cookie banner
     await page.evaluate(() => window.scrollBy(0, 600));
