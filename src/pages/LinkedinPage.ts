@@ -1,10 +1,10 @@
-import { Page, Locator } from '@playwright/test';
-import GenericMethods from '../utils/GenericMethods';
-import LinkedinLocators from '../locators/LinkedinLocators';
-import QuestionAnswerHandler from '../utils/QuestionAnswerHandler';
+import { Locator, Page } from '@playwright/test';
+import { LinkedinLocators } from '../locators/LinkedinLocators';
 import DataConfig from '../utils/DataConfig';
+import GenericMethods from '../utils/GenericMethods';
+import QuestionAnswerHandler from '../utils/QuestionAnswerHandler';
 
-class LinkedinPage extends GenericMethods {
+export class LinkedinPage extends GenericMethods {
     private page: Page;
     private locators: LinkedinLocators;
     private questionAnswerHandler: QuestionAnswerHandler;
@@ -70,7 +70,7 @@ class LinkedinPage extends GenericMethods {
             console.log(`Page Title: ${await this.page.title()}`);
 
             // Take a screenshot for debugging
-            await this.page.screenshot({ path: 'screenshots/login-error.png' }).catch(() => {});
+            await this.page.screenshot({ path: 'screenshots/login-error.png' }).catch(() => { });
 
             throw new Error(`Login failed: ${(error as Error).message}`);
         }
@@ -567,5 +567,3 @@ class LinkedinPage extends GenericMethods {
         await this.page.reload();
     }
 }
-
-export default LinkedinPage;

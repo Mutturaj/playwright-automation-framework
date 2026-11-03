@@ -1,5 +1,5 @@
 import { test, Browser, Page, BrowserContext } from '@playwright/test';
-import NaukriPage from '../src/pages/NaukriPage';
+import {NaukriPage} from '../src/pages/NaukriPage';
 import DataRead from '../src/utils/dataRead';
 import DataConfig from '../src/utils/DataConfig';
 

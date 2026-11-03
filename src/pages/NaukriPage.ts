@@ -1,10 +1,10 @@
 import { Page } from '@playwright/test';
-import GenericMethods from '../utils/GenericMethods';
-import NaukriLocators from '../locators/NaukriLocators';
-import QuestionAnswerHandler from '../utils/QuestionAnswerHandler';
+import { NaukriLocators } from '../locators/NaukriLocators';
 import DataConfig from '../utils/DataConfig';
+import GenericMethods from '../utils/GenericMethods';
+import QuestionAnswerHandler from '../utils/QuestionAnswerHandler';
 
-class NaukriPage extends GenericMethods {
+export class NaukriPage extends GenericMethods {
     private page: Page;
     private locators: NaukriLocators;
     private questionAnswerHandler?: QuestionAnswerHandler;
@@ -530,5 +530,3 @@ class NaukriPage extends GenericMethods {
         console.log(`Total Jobs Applied on Naukri: ${this.appliedJobsCount}`);
     }
 }
-
-export default NaukriPage;

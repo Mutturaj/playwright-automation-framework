@@ -1,6 +1,6 @@
 import LocatorsDetails from '../utils/LocatorsDetails';
 
-class LinkedinLocators {
+export class LinkedinLocators {
     // Login locators
     EmailID: LocatorsDetails;
     Password: LocatorsDetails;
@@ -127,5 +127,3 @@ class LinkedinLocators {
         this.profileIcon = new LocatorsDetails('xpath', "//span[@class='t-12 global-nav__primary-link-text' and text()='Me']", 'Profile Icon');
     }
 }
-
-export default LinkedinLocators;

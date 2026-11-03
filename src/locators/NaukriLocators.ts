@@ -1,6 +1,6 @@
 import LocatorsDetails from '../utils/LocatorsDetails';
 
-class NaukriLocators {
+export class NaukriLocators {
     // Login locators
     EmailID: LocatorsDetails;
     Password: LocatorsDetails;
@@ -93,5 +93,5 @@ class NaukriLocators {
         this.ReachedMaxLimit = new LocatorsDetails('xpath', "//span[text()='You have reached the maximum application']", 'Reached Max Limit');
     }
 }
+// export default NaukriLocators;
 
-export default NaukriLocators;
