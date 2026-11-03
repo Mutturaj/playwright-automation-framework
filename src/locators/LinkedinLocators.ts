@@ -1,129 +1,271 @@
 import LocatorsDetails from '../utils/LocatorsDetails';
 
+/**
+ * LinkedIn Page Locators
+ * Centralized repository of all LinkedIn element locators
+ */
 export class LinkedinLocators {
-    // Login locators
-    EmailID: LocatorsDetails;
-    Password: LocatorsDetails;
-    SignInButton: LocatorsDetails;
+    // ==================== LOGIN LOCATORS ====================
+    readonly EmailID = new LocatorsDetails(
+        'xpath',
+        "//input[@name='session_key']",
+        'Email ID Input'
+    );
 
-    // Navigation locators
-    JobIcon: LocatorsDetails;
-    NotificationIcon: LocatorsDetails;
-    viewJobsButton: LocatorsDetails;
+    readonly Password = new LocatorsDetails(
+        'xpath',
+        "//input[@name='session_password']",
+        'Password Input'
+    );
 
-    // Search locators
-    TitleOfJob: LocatorsDetails;
-    LocationOfJob: LocatorsDetails;
-    SearchBox: LocatorsDetails;
+    readonly SignInButton = new LocatorsDetails(
+        'xpath',
+        "//button[@type='submit']",
+        'Sign in Button'
+    );
 
-    // Filters
-    EasyApplyFilter: LocatorsDetails;
-    DatePostedButton: LocatorsDetails;
-    PastWeekButton: LocatorsDetails;
-    AllFiltersButton: LocatorsDetails;
-    JobTitleFilter: LocatorsDetails;
-    JobTitleCheckbox: LocatorsDetails;
-    ShowAllResults: LocatorsDetails;
+    // ==================== NAVIGATION LOCATORS ====================
+    readonly JobIcon = new LocatorsDetails(
+        'xpath',
+        "//*[@id='job-medium']",
+        'Job Icon'
+    );
 
-    // Job list
-    listOfJobs: LocatorsDetails;
-    listOfJobsFrame: LocatorsDetails;
-    listOfPages: LocatorsDetails;
-    nextPage1: LocatorsDetails;
+    readonly NotificationIcon = new LocatorsDetails(
+        'xpath',
+        "//a[contains(@href, '/notifications/')]//li-icon[@type='bell-fill']",
+        'Notification Icon'
+    );
 
-    // Application buttons
-    easyApplyButton: LocatorsDetails;
-    continueButton: LocatorsDetails;
-    continueApplyingButton: LocatorsDetails;
-    nextButton: LocatorsDetails;
-    reviewButton: LocatorsDetails;
-    submitApplicationButton: LocatorsDetails;
-    DoneButton: LocatorsDetails;
-    closeIcon: LocatorsDetails;
-    discard: LocatorsDetails;
+    readonly viewJobsButton = new LocatorsDetails(
+        'xpath',
+        "//span[@class='artdeco-button__text']//span[1]",
+        'View Jobs Button'
+    );
 
-    // Form elements
-    AnswerTextfield: LocatorsDetails;
-    textAreaFiled: LocatorsDetails;
-    Questions1: LocatorsDetails;
-    Question2: LocatorsDetails;
-    cityName: LocatorsDetails;
-    DateTextField: LocatorsDetails;
+    // ==================== SEARCH LOCATORS ====================
+    readonly TitleOfJob = new LocatorsDetails(
+        'xpath',
+        "//input[@placeholder='Describe the job you want']",
+        'Title of the Job Input'
+    );
 
-    // Radio, checkbox, dropdown
-    radioButtons: LocatorsDetails;
-    radioGroups: LocatorsDetails;
-    checkBox: LocatorsDetails;
-    dropdownButtons: LocatorsDetails;
+    readonly LocationOfJob = new LocatorsDetails(
+        'xpath',
+        "//input[@aria-label=\"City, state, or zip code\" and contains(@id, 'jobs-search-box-location-id-')]",
+        'Location of the Job'
+    );
 
-    // Job info
-    JobTitle: LocatorsDetails;
-    reachedMaxLimit: LocatorsDetails;
+    readonly SearchBox = new LocatorsDetails(
+        'xpath',
+        "//button[text()='Search']",
+        'Search Box'
+    );
 
-    // Profile
-    profileIcon: LocatorsDetails;
+    // ==================== FILTER LOCATORS ====================
+    readonly EasyApplyFilter = new LocatorsDetails(
+        'xpath',
+        "//button[@aria-label='Easy Apply filter.']",
+        'Easy Apply Filter'
+    );
 
-    constructor() {
-        // Login locators
-        this.EmailID = new LocatorsDetails('xpath', "//input[@name='session_key']", 'EmailID Input');
-        this.Password = new LocatorsDetails('xpath', "//input[@name='session_password']", 'Password Input');
-        this.SignInButton = new LocatorsDetails('xpath', "//button[@type='submit']", 'Sign in Button');
+    readonly DatePostedButton = new LocatorsDetails(
+        'xpath',
+        "//button[text()='Date posted']",
+        'Date Posted button'
+    );
 
-        // Navigation locators
-        this.JobIcon = new LocatorsDetails('xpath', "//*[@id='job-medium']", 'Job Icon');
-        this.NotificationIcon = new LocatorsDetails('xpath', "//a[contains(@href, '/notifications/')]//li-icon[@type='bell-fill']", 'Notification Icon');
-        this.viewJobsButton = new LocatorsDetails('xpath', "//span[@class='artdeco-button__text']//span[1]", 'View Jobs Button');
+    readonly PastWeekButton = new LocatorsDetails(
+        'xpath',
+        "//span[text()='Past week']",
+        'Past Week'
+    );
 
-        // Search locators
-        this.TitleOfJob = new LocatorsDetails('xpath', "//input[@placeholder='Describe the job you want']", 'Title of the Job Input');
-        this.LocationOfJob = new LocatorsDetails('xpath', "//input[@aria-label=\"City, state, or zip code\" and contains(@id, 'jobs-search-box-location-id-')]", 'Location of the Job');
-        this.SearchBox = new LocatorsDetails('xpath', "//button[text()='Search']", 'Search Box');
+    readonly AllFiltersButton = new LocatorsDetails(
+        'xpath',
+        "//button[text()='All filters']",
+        'All filters Button'
+    );
 
-        // Filters
-        this.EasyApplyFilter = new LocatorsDetails('xpath', "//button[@aria-label='Easy Apply filter.']", 'Easy Apply Filter');
-        this.DatePostedButton = new LocatorsDetails('xpath', "//button[text()='Date posted']", 'Date Posted button');
-        this.PastWeekButton = new LocatorsDetails('xpath', "//span[text()='Past week']", 'Past Week');
-        this.AllFiltersButton = new LocatorsDetails('xpath', "//button[text()='All filters']", 'All filters Button');
-        this.JobTitleFilter = new LocatorsDetails('xpath', "//h3[text()='Title']", 'Job Title Filter');
-        this.JobTitleCheckbox = new LocatorsDetails('xpath', "//h3[text()='Title']/ancestor::fieldset//input[@name='title-filter-value']", 'Jobs Title Check Boxes');
-        this.ShowAllResults = new LocatorsDetails('xpath', "//button[@data-test-reusables-filters-modal-show-results-button='true']", 'Show All results Button');
+    readonly JobTitleFilter = new LocatorsDetails(
+        'xpath',
+        "//h3[text()='Title']",
+        'Job Title Filter'
+    );
 
-        // Job list
-        this.listOfJobs = new LocatorsDetails('xpath', "//span[normalize-space()='Easy Apply']/ancestor::li[1]", 'List of Jobs');
-        this.listOfJobsFrame = new LocatorsDetails('cssselector', '.scaffold-layout__list .jobs-search-results-list', 'List of Jobs Frame');
-        this.listOfPages = new LocatorsDetails('xpath', "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]", 'List of Pages');
-        this.nextPage1 = new LocatorsDetails('xpath', "//button[@aria-label='View next page']", 'Next Button');
+    readonly JobTitleCheckbox = new LocatorsDetails(
+        'xpath',
+        "//h3[text()='Title']/ancestor::fieldset//input[@name='title-filter-value']",
+        'Jobs Title Check Boxes'
+    );
 
-        // Application buttons
-        this.easyApplyButton = new LocatorsDetails('xpath', "//button[contains(normalize-space(@class), 'jobs-apply-button artdeco-button artdeco-button--3 artdeco-button--primary ember-view')]//span[text()='Easy Apply']", 'Easy Apply button');
-        this.continueButton = new LocatorsDetails('xpath', "//div[@class='display-flex']//button//span[text()='Continue']", 'Continue button');
-        this.continueApplyingButton = new LocatorsDetails('xpath', "//span[@class='artdeco-button__text' and text()='Continue applying']", 'Continue applying button');
-        this.nextButton = new LocatorsDetails('xpath', "//button[@aria-label='Continue to next step']//span[text()='Next']", 'Next button');
-        this.reviewButton = new LocatorsDetails('xpath', "//span[text()='Review']", 'Review Button');
-        this.submitApplicationButton = new LocatorsDetails('xpath', "//span[text()='Submit application']", 'Submit Application button');
-        this.DoneButton = new LocatorsDetails('xpath', "//span[text()='Done']", 'Done button');
-        this.closeIcon = new LocatorsDetails('xpath', "//div[@aria-labelledby=\"post-apply-modal\"]//*[name()='svg'and @data-test-icon=\"close-medium\"]", 'Close Icon');
-        this.discard = new LocatorsDetails('xpath', "//button[@data-control-name='discard_application_confirm_btn']//span[text()='Discard']", 'Discard Button');
+    readonly ShowAllResults = new LocatorsDetails(
+        'xpath',
+        "//button[@data-test-reusables-filters-modal-show-results-button='true']",
+        'Show All results Button'
+    );
 
-        // Form elements
-        this.AnswerTextfield = new LocatorsDetails('xpath', "//div[@class='artdeco-text-input--container ember-view']//input[@type='text']", 'List of answers Textfield');
-        this.textAreaFiled = new LocatorsDetails('xpath', "//textarea[contains(@class, 'artdeco-text-input__textarea') and @required]", 'Text Area Filed');
-        this.Questions1 = new LocatorsDetails('xpath', "//div[@class='artdeco-text-input--container ember-view']//label[@class='artdeco-text-input--label']", 'All Questions');
-        this.Question2 = new LocatorsDetails('xpath', "//span[@class='jobs-easy-apply-form-section__group-title t-14']", 'All Questions');
-        this.cityName = new LocatorsDetails('xpath', "//input[contains(@id, 'location-GEO-LOCATION') or contains(@id, 'city-HOME-CITY')]", 'Enter City Name');
-        this.DateTextField = new LocatorsDetails('xpath', "//input[@placeholder='mm/dd/yyyy']", 'Date Text field');
+    // ==================== JOB LIST LOCATORS ====================
+    readonly listOfJobs = new LocatorsDetails(
+        'xpath',
+        "//span[normalize-space()='Easy Apply']/ancestor::li[1]",
+        'List of Jobs'
+    );
 
-        // Radio, checkbox, dropdown
-        this.radioButtons = new LocatorsDetails('xpath', ".//input[@type='radio' and @value='Yes']", 'Radio button');
-        this.radioGroups = new LocatorsDetails('xpath', "//fieldset[@data-test-form-builder-radio-button-form-component='true']", 'Radio Groups');
-        this.checkBox = new LocatorsDetails('xpath', "//input[@type='checkbox' and contains(@class, 'fb-form-element__checkbox')]", 'List of Checkbox');
-        this.dropdownButtons = new LocatorsDetails('xpath', "//span[@class='visually-hidden']//following::select", 'List of DropDowns');
+    readonly listOfJobsFrame = new LocatorsDetails(
+        'cssselector',
+        '.scaffold-layout__list .jobs-search-results-list',
+        'List of Jobs Frame'
+    );
 
-        // Job info
-        this.JobTitle = new LocatorsDetails('xpath', "//h2[@id='jobs-apply-header']", 'Job Name');
-        this.reachedMaxLimit = new LocatorsDetails('xpath', "//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']", 'Reached Max limit');
+    readonly listOfPages = new LocatorsDetails(
+        'xpath',
+        "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]",
+        'List of Pages'
+    );
 
-        // Profile
-        this.profileIcon = new LocatorsDetails('xpath', "//span[@class='t-12 global-nav__primary-link-text' and text()='Me']", 'Profile Icon');
-    }
+    readonly nextPage1 = new LocatorsDetails(
+        'xpath',
+        "//button[@aria-label='View next page']",
+        'Next Button'
+    );
+
+    // ==================== APPLICATION BUTTON LOCATORS ====================
+    readonly easyApplyButton = new LocatorsDetails(
+        'xpath',
+        "//button[contains(normalize-space(@class), 'jobs-apply-button artdeco-button artdeco-button--3 artdeco-button--primary ember-view')]//span[text()='Easy Apply']",
+        'Easy Apply button'
+    );
+
+    readonly continueButton = new LocatorsDetails(
+        'xpath',
+        "//div[@class='display-flex']//button//span[text()='Continue']",
+        'Continue button'
+    );
+
+    readonly continueApplyingButton = new LocatorsDetails(
+        'xpath',
+        "//span[@class='artdeco-button__text' and text()='Continue applying']",
+        'Continue applying button'
+    );
+
+    readonly nextButton = new LocatorsDetails(
+        'xpath',
+        "//button[@aria-label='Continue to next step']//span[text()='Next']",
+        'Next button'
+    );
+
+    readonly reviewButton = new LocatorsDetails(
+        'xpath',
+        "//span[text()='Review']",
+        'Review Button'
+    );
+
+    readonly submitApplicationButton = new LocatorsDetails(
+        'xpath',
+        "//span[text()='Submit application']",
+        'Submit Application button'
+    );
+
+    readonly DoneButton = new LocatorsDetails(
+        'xpath',
+        "//span[text()='Done']",
+        'Done button'
+    );
+
+    readonly closeIcon = new LocatorsDetails(
+        'xpath',
+        "//div[@aria-labelledby=\"post-apply-modal\"]//*[name()='svg'and @data-test-icon=\"close-medium\"]",
+        'Close Icon'
+    );
+
+    readonly discard = new LocatorsDetails(
+        'xpath',
+        "//button[@data-control-name='discard_application_confirm_btn']//span[text()='Discard']",
+        'Discard Button'
+    );
+
+    // ==================== FORM ELEMENT LOCATORS ====================
+    readonly AnswerTextfield = new LocatorsDetails(
+        'xpath',
+        "//div[@class='artdeco-text-input--container ember-view']//input[@type='text']",
+        'List of answers Textfield'
+    );
+
+    readonly textAreaFiled = new LocatorsDetails(
+        'xpath',
+        "//textarea[contains(@class, 'artdeco-text-input__textarea') and @required]",
+        'Text Area Filed'
+    );
+
+    readonly Questions1 = new LocatorsDetails(
+        'xpath',
+        "//div[@class='artdeco-text-input--container ember-view']//label[@class='artdeco-text-input--label']",
+        'All Questions'
+    );
+
+    readonly Question2 = new LocatorsDetails(
+        'xpath',
+        "//span[@class='jobs-easy-apply-form-section__group-title t-14']",
+        'All Questions'
+    );
+
+    readonly cityName = new LocatorsDetails(
+        'xpath',
+        "//input[contains(@id, 'location-GEO-LOCATION') or contains(@id, 'city-HOME-CITY')]",
+        'Enter City Name'
+    );
+
+    readonly DateTextField = new LocatorsDetails(
+        'xpath',
+        "//input[@placeholder='mm/dd/yyyy']",
+        'Date Text field'
+    );
+
+    // ==================== RADIO, CHECKBOX, DROPDOWN LOCATORS ====================
+    readonly radioButtons = new LocatorsDetails(
+        'xpath',
+        ".//input[@type='radio' and @value='Yes']",
+        'Radio button'
+    );
+
+    readonly radioGroups = new LocatorsDetails(
+        'xpath',
+        "//fieldset[@data-test-form-builder-radio-button-form-component='true']",
+        'Radio Groups'
+    );
+
+    readonly checkBox = new LocatorsDetails(
+        'xpath',
+        "//input[@type='checkbox' and contains(@class, 'fb-form-element__checkbox')]",
+        'List of Checkbox'
+    );
+
+    readonly dropdownButtons = new LocatorsDetails(
+        'xpath',
+        "//span[@class='visually-hidden']//following::select",
+        'List of DropDowns'
+    );
+
+    // ==================== JOB INFO LOCATORS ====================
+    readonly JobTitle = new LocatorsDetails(
+        'xpath',
+        "//h2[@id='jobs-apply-header']",
+        'Job Name'
+    );
+
+    readonly reachedMaxLimit = new LocatorsDetails(
+        'xpath',
+        "//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']",
+        'Reached Max limit'
+    );
+
+    // ==================== PROFILE LOCATORS ====================
+    readonly profileIcon = new LocatorsDetails(
+        'xpath',
+        "//span[@class='t-12 global-nav__primary-link-text' and text()='Me']",
+        'Profile Icon'
+    );
 }
+
+export default LinkedinLocators;

@@ -1,97 +1,192 @@
 import LocatorsDetails from '../utils/LocatorsDetails';
 
+/**
+ * Naukri Page Locators
+ * Centralized repository of all Naukri.com element locators
+ * Updated for current Naukri UI (2026)
+ */
 export class NaukriLocators {
-    // Login locators
-    EmailID: LocatorsDetails;
-    Password: LocatorsDetails;
-    LoginButton: LocatorsDetails;
+    // ==================== LOGIN LOCATORS ====================
+    readonly EmailID = new LocatorsDetails(
+        'xpath',
+        "//input[contains(@placeholder, 'Email ID') or contains(@placeholder, 'Username')]",
+        'Email ID Input'
+    );
 
-    // Profile update
-    EditIcon: LocatorsDetails;
-    SaveButton: LocatorsDetails;
+    readonly Password = new LocatorsDetails(
+        'xpath',
+        "//input[@type='password' or contains(@placeholder, 'Password') or contains(@placeholder, 'password')]",
+        'Password Input'
+    );
 
-    // Navigation
-    JobButton: LocatorsDetails;
-    SearchIcon1: LocatorsDetails;
-    SearchIcon2: LocatorsDetails;
+    readonly LoginButton = new LocatorsDetails(
+        'xpath',
+        "//button[@type='submit' and text()='Login']",
+        'Login Button'
+    );
 
-    // Search filters
-    Designation: LocatorsDetails;
-    Location: LocatorsDetails;
-    ExperienceButton: LocatorsDetails;
+    // ==================== PROFILE UPDATE LOCATORS ====================
+    readonly EditIcon = new LocatorsDetails(
+        'xpath',
+        "//em[@class='icon edit']",
+        'Edit Icon'
+    );
 
-    // Job list
-    listOfJobs: LocatorsDetails;
-    listOfJobsFromSearch: LocatorsDetails;
-    ApplyButton: LocatorsDetails;
-    ApplyCompanySite: LocatorsDetails;
-    JobTitle: LocatorsDetails;
+    readonly SaveButton = new LocatorsDetails(
+        'xpath',
+        "//button[contains(@class,'updateProfile')]",
+        'Save Button'
+    );
 
-    // Pagination
-    pageNum: LocatorsDetails;
+    // ==================== NAVIGATION LOCATORS ====================
+    readonly JobButton = new LocatorsDetails(
+        'xpath',
+        "//a[text()='Jobs']",
+        'Job Button'
+    );
 
-    // Chatbot
-    chatBotPage: LocatorsDetails;
-    chatBotQuestion: LocatorsDetails;
-    answerTextFiled: LocatorsDetails;
-    RadioButtons: LocatorsDetails;
-    checkbox: LocatorsDetails;
-    yesButton: LocatorsDetails;
-    SearchFiled: LocatorsDetails;
-    suggestionList: LocatorsDetails;
-    saveButtonContainer: LocatorsDetails;
-    skipThisQues: LocatorsDetails;
-    DOBfield: LocatorsDetails;
+    readonly SearchIcon1 = new LocatorsDetails(
+        'xpath',
+        "//span[@class='nI-gNb-sb__placeholder']",
+        'Search Icon 1'
+    );
 
-    // Limit reached
-    ReachedMaxLimit: LocatorsDetails;
+    readonly SearchIcon2 = new LocatorsDetails(
+        'xpath',
+        "//button[text()='Search']",
+        'Search Icon 2'
+    );
 
-    constructor() {
-        // Login locators - Updated for current Naukri UI
-        this.EmailID = new LocatorsDetails('xpath', "//input[contains(@placeholder, 'Email ID') or contains(@placeholder, 'Username')]", 'Email ID Input');
-        this.Password = new LocatorsDetails('xpath', "//input[@type='password' or contains(@placeholder, 'Password') or contains(@placeholder, 'password')]", 'Password Input');
-        this.LoginButton = new LocatorsDetails('xpath', "//button[@type='submit' and text()='Login']", 'Login Button');
+    // ==================== SEARCH FILTER LOCATORS ====================
+    readonly Designation = new LocatorsDetails(
+        'xpath',
+        "//input[@placeholder='Enter keyword / designation / companies']",
+        'Designation Input'
+    );
 
-        // Profile update
-        this.EditIcon = new LocatorsDetails('xpath', "//em[@class='icon edit']", 'Edit Icon');
-        this.SaveButton = new LocatorsDetails('xpath', "//button[contains(@class,'updateProfile')]", 'Save Button');
+    readonly Location = new LocatorsDetails(
+        'xpath',
+        "//input[@placeholder='Enter location']",
+        'Location Input'
+    );
 
-        // Navigation
-        this.JobButton = new LocatorsDetails('xpath', "//a[text()='Jobs']", 'Job Button');
-        this.SearchIcon1 = new LocatorsDetails('xpath', "//span[@class='nI-gNb-sb__placeholder']", 'Search Icon 1');
-        this.SearchIcon2 = new LocatorsDetails('xpath', "//button[text()='Search']", 'Search Icon 2');
+    readonly ExperienceButton = new LocatorsDetails(
+        'xpath',
+        "//div[@class='dropdownMainContainer']//span[text()='Experience']",
+        'Experience Button'
+    );
 
-        // Search filters
-        this.Designation = new LocatorsDetails('xpath', "//input[@placeholder='Enter keyword / designation / companies']", 'Designation Input');
-        this.Location = new LocatorsDetails('xpath', "//input[@placeholder='Enter location']", 'Location Input');
-        this.ExperienceButton = new LocatorsDetails('xpath', "//div[@class='dropdownMainContainer']//span[text()='Experience']", 'Experience Button');
+    // ==================== JOB LIST LOCATORS ====================
+    readonly listOfJobs = new LocatorsDetails(
+        'xpath',
+        "//div[@class='cust-job-tuple layout-wrapper lay-2 sjw__tuple ']",
+        'List of Jobs'
+    );
 
-        // Job list
-        this.listOfJobs = new LocatorsDetails('xpath', "//div[@class='cust-job-tuple layout-wrapper lay-2 sjw__tuple ']", 'List of Jobs');
-        this.listOfJobsFromSearch = new LocatorsDetails('xpath', "//article[@class='jobTuple bgWhite br4 mb-8']", 'List of Jobs From Search');
-        this.ApplyButton = new LocatorsDetails('xpath', "//button[text()='Apply']", 'Apply Button');
-        this.ApplyCompanySite = new LocatorsDetails('xpath', "//button[text()='Apply on company site']", 'Apply on Company Site Button');
-        this.JobTitle = new LocatorsDetails('xpath', "//h1[@class='jd-header-title']", 'Job Title');
+    readonly listOfJobsFromSearch = new LocatorsDetails(
+        'xpath',
+        "//article[@class='jobTuple bgWhite br4 mb-8']",
+        'List of Jobs From Search'
+    );
 
-        // Pagination
-        this.pageNum = new LocatorsDetails('xpath', "//div[@class='styles_pagination__oZVUR']//a", 'Page Numbers');
+    readonly ApplyButton = new LocatorsDetails(
+        'xpath',
+        "//button[text()='Apply']",
+        'Apply Button'
+    );
 
-        // Chatbot
-        this.chatBotPage = new LocatorsDetails('xpath', "//div[@class='chatBot chatBot-panel']", 'Chatbot Page');
-        this.chatBotQuestion = new LocatorsDetails('xpath', "//p[@class='msg-text']", 'Chatbot Question');
-        this.answerTextFiled = new LocatorsDetails('xpath', "//input[@type='text' and @class='inputBox']", 'Answer Text Field');
-        this.RadioButtons = new LocatorsDetails('xpath', "//input[@type='radio']", 'Radio Buttons');
-        this.checkbox = new LocatorsDetails('xpath', "//input[@type='checkbox']", 'Checkbox');
-        this.yesButton = new LocatorsDetails('xpath', "//button[text()='Yes']", 'Yes Button');
-        this.SearchFiled = new LocatorsDetails('xpath', "//input[@type='search']", 'Search Field');
-        this.suggestionList = new LocatorsDetails('xpath', "//li[@class='suggestion']", 'Suggestion List');
-        this.saveButtonContainer = new LocatorsDetails('xpath', "//div[@class='questionWrap']", 'Save Button Container');
-        this.skipThisQues = new LocatorsDetails('xpath', "//a[text()='Skip this question']", 'Skip This Question');
-        this.DOBfield = new LocatorsDetails('xpath', "//input[@type='tel']", 'DOB Field');
+    readonly ApplyCompanySite = new LocatorsDetails(
+        'xpath',
+        "//button[text()='Apply on company site']",
+        'Apply on Company Site Button'
+    );
 
-        // Limit reached
-        this.ReachedMaxLimit = new LocatorsDetails('xpath', "//span[text()='You have reached the maximum application']", 'Reached Max Limit');
-    }
+    readonly JobTitle = new LocatorsDetails(
+        'xpath',
+        "//h1[@class='jd-header-title']",
+        'Job Title'
+    );
+
+    // ==================== PAGINATION LOCATORS ====================
+    readonly pageNum = new LocatorsDetails(
+        'xpath',
+        "//div[@class='styles_pagination__oZVUR']//a",
+        'Page Numbers'
+    );
+
+    // ==================== CHATBOT LOCATORS ====================
+    readonly chatBotPage = new LocatorsDetails(
+        'xpath',
+        "//div[@class='chatBot chatBot-panel']",
+        'Chatbot Page'
+    );
+
+    readonly chatBotQuestion = new LocatorsDetails(
+        'xpath',
+        "//p[@class='msg-text']",
+        'Chatbot Question'
+    );
+
+    readonly answerTextFiled = new LocatorsDetails(
+        'xpath',
+        "//input[@type='text' and @class='inputBox']",
+        'Answer Text Field'
+    );
+
+    readonly RadioButtons = new LocatorsDetails(
+        'xpath',
+        "//input[@type='radio']",
+        'Radio Buttons'
+    );
+
+    readonly checkbox = new LocatorsDetails(
+        'xpath',
+        "//input[@type='checkbox']",
+        'Checkbox'
+    );
+
+    readonly yesButton = new LocatorsDetails(
+        'xpath',
+        "//button[text()='Yes']",
+        'Yes Button'
+    );
+
+    readonly SearchFiled = new LocatorsDetails(
+        'xpath',
+        "//input[@type='search']",
+        'Search Field'
+    );
+
+    readonly suggestionList = new LocatorsDetails(
+        'xpath',
+        "//li[@class='suggestion']",
+        'Suggestion List'
+    );
+
+    readonly saveButtonContainer = new LocatorsDetails(
+        'xpath',
+        "//div[@class='questionWrap']",
+        'Save Button Container'
+    );
+
+    readonly skipThisQues = new LocatorsDetails(
+        'xpath',
+        "//a[text()='Skip this question']",
+        'Skip This Question'
+    );
+
+    readonly DOBfield = new LocatorsDetails(
+        'xpath',
+        "//input[@type='tel']",
+        'DOB Field'
+    );
+
+    // ==================== LIMIT REACHED LOCATOR ====================
+    readonly ReachedMaxLimit = new LocatorsDetails(
+        'xpath',
+        "//span[text()='You have reached the maximum application']",
+        'Reached Max Limit'
+    );
 }
-// export default NaukriLocators;
 
+export default NaukriLocators;
