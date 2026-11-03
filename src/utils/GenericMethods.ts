@@ -1,10 +1,11 @@
-const { expect } = require('@playwright/test');
+import { expect, Page, BrowserContext, Locator } from '@playwright/test';
+import LocatorsDetails from './LocatorsDetails';
 
 class GenericMethods {
     /**
      * Wait for page to load completely
      */
-    async waitForPageLoad(page) {
+    async waitForPageLoad(page: Page): Promise<void> {
         await page.waitForLoadState('domcontentloaded');
         await page.waitForLoadState('networkidle', { timeout: 80000 }).catch(() => {
             console.log('Network idle timeout, continuing...');
@@ -14,7 +15,7 @@ class GenericMethods {
     /**
      * Find element using locator details
      */
-    async findElement(page, locatorDetails) {
+    async findElement(page: Page, locatorDetails: LocatorsDetails): Promise<Locator | null> {
         try {
             const locator = this.getLocatorFromDetails(page, locatorDetails);
             await locator.waitFor({ state: 'visible', timeout: 50000 });
@@ -28,7 +29,7 @@ class GenericMethods {
     /**
      * Find multiple elements using locator details
      */
-    async findElements(page, locatorDetails) {
+    async findElements(page: Page, locatorDetails: LocatorsDetails): Promise<Locator | null> {
         try {
             const locator = this.getLocatorFromDetails(page, locatorDetails);
             const count = await locator.count();
@@ -42,7 +43,7 @@ class GenericMethods {
     /**
      * Check if element is present
      */
-    async isElementPresent(page, locatorDetails) {
+    async isElementPresent(page: Page, locatorDetails: LocatorsDetails): Promise<boolean> {
         try {
             const locator = this.getLocatorFromDetails(page, locatorDetails);
             const count = await locator.count();
@@ -55,14 +56,14 @@ class GenericMethods {
     /**
      * Check if element list is empty
      */
-    isElementListEmpty(locator) {
+    isElementListEmpty(locator: Locator | null): boolean {
         return locator === null;
     }
 
     /**
      * Wait for element to be visible
      */
-    async waitForElement(page, locatorDetails) {
+    async waitForElement(page: Page, locatorDetails: LocatorsDetails): Promise<Locator> {
         console.log(`Waiting for element: ${locatorDetails.value}`);
         const locator = this.getLocatorFromDetails(page, locatorDetails);
         await locator.waitFor({ state: 'visible', timeout: 50000 });
@@ -72,7 +73,7 @@ class GenericMethods {
     /**
      * Wait for element to be clickable
      */
-    async waitForElementToBeClickable(page, locatorDetails) {
+    async waitForElementToBeClickable(page: Page, locatorDetails: LocatorsDetails): Promise<void> {
         const locator = this.getLocatorFromDetails(page, locatorDetails);
         await locator.waitFor({ state: 'visible', timeout: 20000 });
         await expect(locator).toBeEnabled({ timeout: 20000 });
@@ -81,7 +82,7 @@ class GenericMethods {
     /**
      * Click element
      */
-    async clickElement(page, locatorDetails) {
+    async clickElement(page: Page, locatorDetails: LocatorsDetails): Promise<void> {
         const locator = await this.waitForElement(page, locatorDetails);
         await locator.click();
     }
@@ -89,7 +90,7 @@ class GenericMethods {
     /**
      * Send keys to element
      */
-    async sendKeysToElement(page, locatorDetails, text) {
+    async sendKeysToElement(page: Page, locatorDetails: LocatorsDetails, text: string): Promise<void> {
         const locator = await this.waitForElement(page, locatorDetails);
         await locator.click();
         await locator.clear();
@@ -99,7 +100,7 @@ class GenericMethods {
     /**
      * Scroll to element
      */
-    async scrollToElement(page, locatorDetails) {
+    async scrollToElement(page: Page, locatorDetails: LocatorsDetails): Promise<void> {
         const locator = this.getLocatorFromDetails(page, locatorDetails);
         await locator.scrollIntoViewIfNeeded();
         console.log(`Scrolled to element: ${locatorDetails.name}`);
@@ -108,7 +109,7 @@ class GenericMethods {
     /**
      * Scroll to top of page
      */
-    async scrollToTop(page) {
+    async scrollToTop(page: Page): Promise<void> {
         await page.evaluate(() => window.scrollTo(0, 0));
         console.log('Scrolled to the top of the page.');
     }
@@ -116,30 +117,30 @@ class GenericMethods {
     /**
      * Execute JavaScript on element
      */
-    async executeJavaScript(page, script, locatorDetails) {
+    async executeJavaScript(page: Page, script: string, locatorDetails: LocatorsDetails): Promise<void> {
         const locator = this.getLocatorFromDetails(page, locatorDetails);
         const element = await locator.elementHandle();
         if (element) {
-            await page.evaluate((el, scriptText) => {
+            await page.evaluate(({ el, scriptText }: { el: any; scriptText: string }) => {
                 eval(scriptText.replace('arguments[0]', 'el'));
-            }, element, script);
+            }, { el: element, scriptText: script });
         }
     }
 
     /**
      * Execute JavaScript on WebElement
      */
-    async executeJavaScriptOnElement(page, script, element) {
-        await page.evaluate((el, scriptText) => {
+    async executeJavaScriptOnElement(page: Page, script: string, element: any): Promise<void> {
+        await page.evaluate(({ el, scriptText }: { el: any; scriptText: string }) => {
             const func = new Function('arguments', scriptText);
             func([el]);
-        }, element, script);
+        }, { el: element, scriptText: script });
     }
 
     /**
      * Select dropdown by index
      */
-    async selectByIndex(page, locatorDetails, index) {
+    async selectByIndex(page: Page, locatorDetails: LocatorsDetails, index: number): Promise<void> {
         const locator = await this.waitForElement(page, locatorDetails);
         await locator.selectOption({ index: index });
     }
@@ -147,7 +148,7 @@ class GenericMethods {
     /**
      * Select dropdown by value
      */
-    async selectByValue(page, locatorDetails, value) {
+    async selectByValue(page: Page, locatorDetails: LocatorsDetails, value: string): Promise<void> {
         const locator = await this.waitForElement(page, locatorDetails);
         await locator.selectOption({ value: value });
     }
@@ -155,7 +156,7 @@ class GenericMethods {
     /**
      * Switch to tab by index
      */
-    async switchToTabByIndex(context, tabIndex) {
+    async switchToTabByIndex(context: BrowserContext, tabIndex: number): Promise<void> {
         const pages = context.pages();
         if (tabIndex >= 0 && tabIndex < pages.length) {
             await pages[tabIndex].bringToFront();
@@ -168,7 +169,7 @@ class GenericMethods {
     /**
      * Get locator from details
      */
-    getLocatorFromDetails(page, locatorDetails) {
+    getLocatorFromDetails(page: Page, locatorDetails: LocatorsDetails): Locator {
         switch (locatorDetails.type.toLowerCase()) {
             case 'id':
                 return page.locator(`#${locatorDetails.value}`);
@@ -186,4 +187,4 @@ class GenericMethods {
     }
 }
 
-module.exports = GenericMethods;
+export default GenericMethods;

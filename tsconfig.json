@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     /*  Folder structure */
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
 
     /*  Compilation settings */
     "target": "ES2020",               // good balance for Node.js support
     "module": "CommonJS",             // required for Node.js
-    "lib": ["ES2020"],
-    "types": ["node"],                // so TypeScript knows Node globals like 'process', 'fs', etc.
-    
+    "lib": ["ES2020", "DOM"],
+    "types": ["node", "@playwright/test"],  // so TypeScript knows Node globals like 'process', 'fs', etc. and Playwright
+
     /*  Output */
     "sourceMap": true,
     "declaration": false,             // optional; set to true only if publishing a library
@@ -19,9 +19,12 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,          // enables default imports from CommonJS modules
+    "resolveJsonModule": true,        // allows importing JSON files
 
     /*  Speed / Compatibility */
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist", "test-results", "playwright-report"]
 }

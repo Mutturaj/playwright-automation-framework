@@ -1,23 +1,81 @@
-const LocatorsDetails = require('../utils/LocatorsDetails');
+import LocatorsDetails from '../utils/LocatorsDetails';
 
 class LinkedinLocators {
+    // Login locators
+    EmailID: LocatorsDetails;
+    Password: LocatorsDetails;
+    SignInButton: LocatorsDetails;
+
+    // Navigation locators
+    JobIcon: LocatorsDetails;
+    NotificationIcon: LocatorsDetails;
+    viewJobsButton: LocatorsDetails;
+
+    // Search locators
+    TitleOfJob: LocatorsDetails;
+    LocationOfJob: LocatorsDetails;
+    SearchBox: LocatorsDetails;
+
+    // Filters
+    EasyApplyFilter: LocatorsDetails;
+    DatePostedButton: LocatorsDetails;
+    PastWeekButton: LocatorsDetails;
+    AllFiltersButton: LocatorsDetails;
+    JobTitleFilter: LocatorsDetails;
+    JobTitleCheckbox: LocatorsDetails;
+    ShowAllResults: LocatorsDetails;
+
+    // Job list
+    listOfJobs: LocatorsDetails;
+    listOfJobsFrame: LocatorsDetails;
+    listOfPages: LocatorsDetails;
+    nextPage1: LocatorsDetails;
+
+    // Application buttons
+    easyApplyButton: LocatorsDetails;
+    continueButton: LocatorsDetails;
+    continueApplyingButton: LocatorsDetails;
+    nextButton: LocatorsDetails;
+    reviewButton: LocatorsDetails;
+    submitApplicationButton: LocatorsDetails;
+    DoneButton: LocatorsDetails;
+    closeIcon: LocatorsDetails;
+    discard: LocatorsDetails;
+
+    // Form elements
+    AnswerTextfield: LocatorsDetails;
+    textAreaFiled: LocatorsDetails;
+    Questions1: LocatorsDetails;
+    Question2: LocatorsDetails;
+    cityName: LocatorsDetails;
+    DateTextField: LocatorsDetails;
+
+    // Radio, checkbox, dropdown
+    radioButtons: LocatorsDetails;
+    radioGroups: LocatorsDetails;
+    checkBox: LocatorsDetails;
+    dropdownButtons: LocatorsDetails;
+
+    // Job info
+    JobTitle: LocatorsDetails;
+    reachedMaxLimit: LocatorsDetails;
+
+    // Profile
+    profileIcon: LocatorsDetails;
+
     constructor() {
         // Login locators
         this.EmailID = new LocatorsDetails('xpath', "//input[@name='session_key']", 'EmailID Input');
-       
         this.Password = new LocatorsDetails('xpath', "//input[@name='session_password']", 'Password Input');
-       
         this.SignInButton = new LocatorsDetails('xpath', "//button[@type='submit']", 'Sign in Button');
-        
+
         // Navigation locators
         this.JobIcon = new LocatorsDetails('xpath', "//*[@id='job-medium']", 'Job Icon');
-    
         this.NotificationIcon = new LocatorsDetails('xpath', "//a[contains(@href, '/notifications/')]//li-icon[@type='bell-fill']", 'Notification Icon');
         this.viewJobsButton = new LocatorsDetails('xpath', "//span[@class='artdeco-button__text']//span[1]", 'View Jobs Button');
 
         // Search locators
         this.TitleOfJob = new LocatorsDetails('xpath', "//input[@placeholder='Describe the job you want']", 'Title of the Job Input');
-        
         this.LocationOfJob = new LocatorsDetails('xpath', "//input[@aria-label=\"City, state, or zip code\" and contains(@id, 'jobs-search-box-location-id-')]", 'Location of the Job');
         this.SearchBox = new LocatorsDetails('xpath', "//button[text()='Search']", 'Search Box');
 
@@ -70,4 +128,4 @@ class LinkedinLocators {
     }
 }
 
-module.exports = LinkedinLocators;
+export default LinkedinLocators;

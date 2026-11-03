@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020", "DOM"],
+    "checkJs": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["node", "@playwright/test"],
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "node_modules/*"]
+    }
+  },
+  "include": [
+    "tests/**/*.js",
+    "playwright-learning/**/*.js",
+    "**/*.spec.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "test-results"
+  ]
+}

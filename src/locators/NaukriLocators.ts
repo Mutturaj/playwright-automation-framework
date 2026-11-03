@@ -1,11 +1,56 @@
-const LocatorsDetails = require('../utils/LocatorsDetails');
+import LocatorsDetails from '../utils/LocatorsDetails';
 
 class NaukriLocators {
+    // Login locators
+    EmailID: LocatorsDetails;
+    Password: LocatorsDetails;
+    LoginButton: LocatorsDetails;
+
+    // Profile update
+    EditIcon: LocatorsDetails;
+    SaveButton: LocatorsDetails;
+
+    // Navigation
+    JobButton: LocatorsDetails;
+    SearchIcon1: LocatorsDetails;
+    SearchIcon2: LocatorsDetails;
+
+    // Search filters
+    Designation: LocatorsDetails;
+    Location: LocatorsDetails;
+    ExperienceButton: LocatorsDetails;
+
+    // Job list
+    listOfJobs: LocatorsDetails;
+    listOfJobsFromSearch: LocatorsDetails;
+    ApplyButton: LocatorsDetails;
+    ApplyCompanySite: LocatorsDetails;
+    JobTitle: LocatorsDetails;
+
+    // Pagination
+    pageNum: LocatorsDetails;
+
+    // Chatbot
+    chatBotPage: LocatorsDetails;
+    chatBotQuestion: LocatorsDetails;
+    answerTextFiled: LocatorsDetails;
+    RadioButtons: LocatorsDetails;
+    checkbox: LocatorsDetails;
+    yesButton: LocatorsDetails;
+    SearchFiled: LocatorsDetails;
+    suggestionList: LocatorsDetails;
+    saveButtonContainer: LocatorsDetails;
+    skipThisQues: LocatorsDetails;
+    DOBfield: LocatorsDetails;
+
+    // Limit reached
+    ReachedMaxLimit: LocatorsDetails;
+
     constructor() {
-        // Login locators
-        this.EmailID = new LocatorsDetails('xpath', "//input[@placeholder='Enter your active Email ID / Username']", 'Email ID Input');
-        this.Password = new LocatorsDetails('xpath', "//input[@placeholder='Enter your password']", 'Password Input');
-        this.LoginButton = new LocatorsDetails('xpath', "//button[text()='Login']", 'Login Button');
+        // Login locators - Updated for current Naukri UI
+        this.EmailID = new LocatorsDetails('xpath', "//input[contains(@placeholder, 'Email ID') or contains(@placeholder, 'Username')]", 'Email ID Input');
+        this.Password = new LocatorsDetails('xpath', "//input[@type='password' or contains(@placeholder, 'Password') or contains(@placeholder, 'password')]", 'Password Input');
+        this.LoginButton = new LocatorsDetails('xpath', "//button[@type='submit' and text()='Login']", 'Login Button');
 
         // Profile update
         this.EditIcon = new LocatorsDetails('xpath', "//em[@class='icon edit']", 'Edit Icon');
@@ -49,4 +94,4 @@ class NaukriLocators {
     }
 }
 
-module.exports = NaukriLocators;
+export default NaukriLocators;

@@ -1,19 +1,25 @@
-const GenericMethods = require('../utils/GenericMethods');
-const LinkedinLocators = require('../locators/LinkedinLocators');
-const QuestionAnswerHandler = require('../utils/QuestionAnswerHandler');
-const DataConfig = require('../utils/DataConfig');
+import { Page, Locator } from '@playwright/test';
+import GenericMethods from '../utils/GenericMethods';
+import LinkedinLocators from '../locators/LinkedinLocators';
+import QuestionAnswerHandler from '../utils/QuestionAnswerHandler';
+import DataConfig from '../utils/DataConfig';
 
 class LinkedinPage extends GenericMethods {
-    constructor(page) {
+    private page: Page;
+    private locators: LinkedinLocators;
+    private questionAnswerHandler: QuestionAnswerHandler;
+    private appliedJobsCount: number;
+
+    constructor(page: Page) {
         super();
         this.page = page;
         this.locators = new LinkedinLocators();
         const datasetName = DataConfig.getInstance().getDatasetName();
-        this.questionAnswerHandler = new QuestionAnswerHandler(datasetName);
+        this.questionAnswerHandler = new QuestionAnswerHandler(datasetName!);
         this.appliedJobsCount = 0;
     }
 
-    async loginToLinkedIn(data) {
+    async loginToLinkedIn(data: string[]): Promise<void> {
         console.log('\n=== Starting LinkedIn Login ===');
         console.log(`Attempting to login with email: ${data[0]}`);
 
@@ -66,11 +72,11 @@ class LinkedinPage extends GenericMethods {
             // Take a screenshot for debugging
             await this.page.screenshot({ path: 'screenshots/login-error.png' }).catch(() => {});
 
-            throw new Error(`Login failed: ${error.message}`);
+            throw new Error(`Login failed: ${(error as Error).message}`);
         }
     }
 
-    async navigateToJobs() {
+    async navigateToJobs(): Promise<void> {
         await this.waitForPageLoad(this.page);
         console.log('=== Navigating to Jobs ===');
         await this.page.goto('https://www.linkedin.com/jobs/');
@@ -78,7 +84,7 @@ class LinkedinPage extends GenericMethods {
         await this.page.waitForTimeout(500);
     }
 
-    async navigateToNotification() {
+    async navigateToNotification(): Promise<void> {
         await this.waitForPageLoad(this.page);
         const notificationIcon = await this.findElement(this.page, this.locators.NotificationIcon);
         if (notificationIcon) {
@@ -95,7 +101,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async searchForJobs(data) {
+    async searchForJobs(data: string[]): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.page.waitForTimeout(500);
 
@@ -106,7 +112,7 @@ class LinkedinPage extends GenericMethods {
         ];
 
         let titleEntered = false;
-        let titleElement = null;
+        let titleElement: Locator | null = null;
 
         for (const titleLocator of titleLocators) {
             try {
@@ -120,7 +126,7 @@ class LinkedinPage extends GenericMethods {
                     break;
                 }
             } catch (e) {
-                console.log(`Failed with locator: ${titleLocator.name} - ${e.message}`);
+                console.log(`Failed with locator: ${titleLocator.name} - ${(e as Error).message}`);
                 continue;
             }
         }
@@ -141,7 +147,7 @@ class LinkedinPage extends GenericMethods {
         await this.page.waitForTimeout(2000);
     }
 
-    async DatePosted() {
+    async DatePosted(): Promise<void> {
         await this.page.waitForTimeout(1000);
         await this.clickElement(this.page, this.locators.EasyApplyFilter);
         await this.waitForPageLoad(this.page);
@@ -165,7 +171,7 @@ class LinkedinPage extends GenericMethods {
         await this.page.waitForTimeout(1000);
     }
 
-    async applyForJobs(data) {
+    async applyForJobs(data: string[]): Promise<void> {
         let currentPage = 2;
         const maxScrollAttempts = 10;
 
@@ -188,7 +194,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async processJobList(jobsLocator, data) {
+    async processJobList(jobsLocator: Locator, data: string[]): Promise<void> {
         const jobsCount = await jobsLocator.count();
 
         for (let i = 0; i < jobsCount; i++) {
@@ -210,16 +216,16 @@ class LinkedinPage extends GenericMethods {
                     await this.markJobAsApplied(job);
                 }
             } catch (error) {
-                if (error.message.includes('Easy Apply limit reached')) {
+                if ((error as Error).message.includes('Easy Apply limit reached')) {
                     throw error;
                 }
-                console.log(`ElementClickInterceptedException caught, moving to the next job: ${error.message}`);
+                console.log(`ElementClickInterceptedException caught, moving to the next job: ${(error as Error).message}`);
             }
         }
         await this.page.waitForTimeout(1000);
     }
 
-    async scrollForJobs(maxScrollAttempts) {
+    async scrollForJobs(maxScrollAttempts: number): Promise<boolean> {
         let scrollAttempts = 0;
         let jobsFound = false;
         let pagesFound = false;
@@ -239,7 +245,7 @@ class LinkedinPage extends GenericMethods {
         return jobsFound;
     }
 
-    async navigateToNextPage(currentPage) {
+    async navigateToNextPage(currentPage: number): Promise<boolean> {
         console.log('Reached maximum scroll attempts, navigating to next page...');
         try {
             const nextPageButton = await this.page.locator(`//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[@aria-label='Page ${currentPage}']`).first();
@@ -251,24 +257,24 @@ class LinkedinPage extends GenericMethods {
                 return true;
             }
         } catch (error) {
-            console.log(`Could not navigate to page ${currentPage}: ${error.message}`);
+            console.log(`Could not navigate to page ${currentPage}: ${(error as Error).message}`);
         }
         return false;
     }
 
-    async isEasyApplyOrContinuePresent() {
+    async isEasyApplyOrContinuePresent(): Promise<boolean> {
         const easyApplyCount = await this.page.locator(this.locators.easyApplyButton.value).count();
         const continueCount = await this.page.locator(this.locators.continueButton.value).count();
         return easyApplyCount > 0 || continueCount > 0;
     }
 
-    async handleEasyApply(data) {
+    async handleEasyApply(data: string[]): Promise<void> {
         await this.page.waitForTimeout(1000);
         await this.ClickEasyApplyButtonORContinueButton();
         await this.handleJobApplicationProcess(data);
     }
 
-    async ClickEasyApplyButtonORContinueButton() {
+    async ClickEasyApplyButtonORContinueButton(): Promise<void> {
         const continueButtons = await this.page.locator(this.locators.continueButton.value).all();
         if (continueButtons.length > 0) {
             await continueButtons[0].click();
@@ -279,7 +285,7 @@ class LinkedinPage extends GenericMethods {
         await this.page.waitForTimeout(1000);
     }
 
-    async handleJobApplicationProcess(data) {
+    async handleJobApplicationProcess(data: string[]): Promise<void> {
         let applicationSubmitted = false;
         await this.waitForPageLoad(this.page);
 
@@ -339,7 +345,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async nextButton() {
+    async nextButton(): Promise<boolean> {
         const nextButtons = await this.page.locator(this.locators.nextButton.value).all();
         if (nextButtons.length > 0) {
             await nextButtons[0].scrollIntoViewIfNeeded();
@@ -349,7 +355,7 @@ class LinkedinPage extends GenericMethods {
         return false;
     }
 
-    async handleNextSection(data) {
+    async handleNextSection(data: string[]): Promise<void> {
         const nextButtons = await this.page.locator(this.locators.nextButton.value).all();
         if (nextButtons.length > 0) {
             await this.fillTextQuestions();
@@ -362,7 +368,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async handleReviewSection(data) {
+    async handleReviewSection(data: string[]): Promise<void> {
         const reviewButtons = await this.page.locator(this.locators.reviewButton.value).all();
         if (reviewButtons.length > 0) {
             await this.fillTextQuestions();
@@ -377,7 +383,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async fillTextQuestions() {
+    async fillTextQuestions(): Promise<void> {
         const answerFields = await this.page.locator(this.locators.AnswerTextfield.value).all();
         const answerFields2 = await this.page.locator(this.locators.textAreaFiled.value).all();
         const allAnswerFields = [...answerFields, ...answerFields2];
@@ -392,13 +398,13 @@ class LinkedinPage extends GenericMethods {
 
         for (let i = 0; i < allQuestions.length; i++) {
             const questionText = await allQuestions[i].textContent();
-            const answer = this.questionAnswerHandler.getAnswer(questionText);
+            const answer = this.questionAnswerHandler.getAnswer(questionText || '');
             await allAnswerFields[i].clear();
             await allAnswerFields[i].fill(answer);
         }
     }
 
-    async EnterCityName() {
+    async EnterCityName(): Promise<void> {
         const cityNameFields = await this.page.locator(this.locators.cityName.value).all();
         if (cityNameFields.length > 0) {
             for (const field of cityNameFields) {
@@ -410,7 +416,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async handleRadioButtons() {
+    async handleRadioButtons(): Promise<void> {
         const radioGroups = await this.page.locator("//fieldset[@data-test-form-builder-radio-button-form-component='true']").all();
         console.log(`Total radio button groups found: ${radioGroups.length}`);
 
@@ -436,7 +442,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async handleDropdowns() {
+    async handleDropdowns(): Promise<void> {
         const dropdowns = await this.page.locator(this.locators.dropdownButtons.value).all();
         if (dropdowns.length > 0) {
             for (const dropdown of dropdowns) {
@@ -450,7 +456,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async handleCheckboxes() {
+    async handleCheckboxes(): Promise<void> {
         const checkboxes = await this.page.locator(this.locators.checkBox.value).all();
 
         if (checkboxes.length > 0) {
@@ -465,13 +471,13 @@ class LinkedinPage extends GenericMethods {
                         await label.click();
                     }
                 } catch (error) {
-                    console.log(`Error handling checkbox ${i}: ${error.message}`);
+                    console.log(`Error handling checkbox ${i}: ${(error as Error).message}`);
                 }
             }
         }
     }
 
-    async textAreaField(data) {
+    async textAreaField(data: string[]): Promise<void> {
         try {
             const textAreas = await this.page.locator(this.locators.textAreaFiled.value).all();
             if (textAreas && textAreas.length > 0) {
@@ -481,18 +487,18 @@ class LinkedinPage extends GenericMethods {
                         await textArea.clear();
                         await textArea.fill(data[6]);
                     } catch (error) {
-                        console.log(`Error interacting with text area: ${error.message}`);
+                        console.log(`Error interacting with text area: ${(error as Error).message}`);
                     }
                 }
             } else {
                 console.log('No text area elements found.');
             }
         } catch (error) {
-            console.log(`Error handling text area fields: ${error.message}`);
+            console.log(`Error handling text area fields: ${(error as Error).message}`);
         }
     }
 
-    async JoiningDate() {
+    async JoiningDate(): Promise<void> {
         await this.waitForPageLoad(this.page);
         const dateFields = await this.page.locator(this.locators.DateTextField.value).all();
         if (dateFields.length > 0) {
@@ -502,12 +508,12 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async DynamicDateSelector() {
+    async DynamicDateSelector(): Promise<void> {
         const today = new Date();
         const targetDate = new Date(today);
         targetDate.setDate(today.getDate() + 15);
 
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = targetDate.toLocaleDateString('en-US', options);
         const dynamicXPath = `//button[@aria-label='${formattedDate}.']`;
         console.log(`Dynamic XPath: ${dynamicXPath}`);
@@ -522,7 +528,7 @@ class LinkedinPage extends GenericMethods {
         }
     }
 
-    async clickSubmitApplication() {
+    async clickSubmitApplication(): Promise<boolean> {
         let isSubmitted = false;
         await this.JobName();
         const submitButtons = await this.page.locator(this.locators.submitApplicationButton.value).all();
@@ -534,19 +540,19 @@ class LinkedinPage extends GenericMethods {
         return isSubmitted;
     }
 
-    async JobName() {
+    async JobName(): Promise<void> {
         await this.waitForPageLoad(this.page);
         const jobTitleElement = await this.findElement(this.page, this.locators.JobTitle);
         if (jobTitleElement) {
             const jobTitle = await jobTitleElement.textContent();
-            const cleanJobTitle = jobTitle.replace('Apply to ', '');
+            const cleanJobTitle = jobTitle?.replace('Apply to ', '') || '';
             this.appliedJobsCount++;
             console.log(`Applied to this Job from LinkedIn: ${cleanJobTitle}`);
             console.log(`Total Jobs Applied on LinkedIn: ${this.appliedJobsCount}`);
         }
     }
 
-    async markJobAsApplied(job) {
+    async markJobAsApplied(job: Locator): Promise<void> {
         console.log('Easy Apply or Continue button not present on L2 page, marking this job as Applied and skipping.');
         await this.page.goBack();
         await this.page.waitForTimeout(2000);
@@ -554,7 +560,7 @@ class LinkedinPage extends GenericMethods {
         await this.page.waitForTimeout(2000);
     }
 
-    async SignedOut() {
+    async SignedOut(): Promise<void> {
         await this.page.context().clearCookies();
         await this.page.goto('https://www.linkedin.com/m/logout/');
         await this.waitForPageLoad(this.page);
@@ -562,4 +568,4 @@ class LinkedinPage extends GenericMethods {
     }
 }
 
-module.exports = LinkedinPage;
+export default LinkedinPage;

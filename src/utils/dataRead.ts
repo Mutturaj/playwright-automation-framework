@@ -1,14 +1,39 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+
+interface DatasetData {
+    EmailID: string;
+    Password: string;
+    LinkedInJobTitle: string;
+    NaukriJobTitle: string;
+    JobLocation: string;
+    Experience: string;
+    'Hiring Manager Message': string;
+    [key: string]: string;
+}
+
+interface Dataset {
+    name: string;
+    data: DatasetData;
+}
+
+interface DatasetFile {
+    datasets: Dataset[];
+}
+
+interface TestData {
+    name: string;
+    data: string[];
+}
 
 class DataRead {
-    static getTestData() {
+    static getTestData(): TestData[] {
         try {
             const filePath = path.join(process.cwd(), 'dataset.json');
             const fileContent = fs.readFileSync(filePath, 'utf-8');
-            const jsonData = JSON.parse(fileContent);
+            const jsonData: DatasetFile = JSON.parse(fileContent);
 
-            const testDataArray = [];
+            const testDataArray: TestData[] = [];
 
             for (const dataset of jsonData.datasets) {
                 const data = dataset.data;
@@ -26,10 +51,10 @@ class DataRead {
 
             return testDataArray;
         } catch (error) {
-            console.error(`Error reading test data: ${error.message}`);
+            console.error(`Error reading test data: ${(error as Error).message}`);
             return [];
         }
     }
 }
 
-module.exports = DataRead;
+export default DataRead;

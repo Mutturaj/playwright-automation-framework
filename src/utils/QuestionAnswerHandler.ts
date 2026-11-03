@@ -1,18 +1,30 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+
+interface Dataset {
+    name: string;
+    data: Record<string, string>;
+}
+
+interface DatasetFile {
+    datasets: Dataset[];
+}
 
 class QuestionAnswerHandler {
-    constructor(datasetName) {
+    private questionAnswerMap: Map<string, string>;
+    private datasetName: string;
+
+    constructor(datasetName: string) {
         this.questionAnswerMap = new Map();
         this.datasetName = datasetName;
         this.initializeQuestionAnswerMap(datasetName);
     }
 
-    initializeQuestionAnswerMap(datasetName) {
+    private initializeQuestionAnswerMap(datasetName: string): void {
         try {
             const filePath = path.join(process.cwd(), 'dataset.json');
             const fileContent = fs.readFileSync(filePath, 'utf-8');
-            const jsonData = JSON.parse(fileContent);
+            const jsonData: DatasetFile = JSON.parse(fileContent);
             const datasets = jsonData.datasets;
 
             for (const dataset of datasets) {
@@ -26,11 +38,11 @@ class QuestionAnswerHandler {
             }
             console.log(`Initialized ${this.questionAnswerMap.size} question-answer mappings for ${datasetName}`);
         } catch (error) {
-            console.error(`Error loading dataset: ${error.message}`);
+            console.error(`Error loading dataset: ${(error as Error).message}`);
         }
     }
 
-    getAnswer(question) {
+    getAnswer(question: string): string {
         const normalizedQuestion = this.normalizeText(question);
         let bestMatch = "3"; // Default answer
 
@@ -49,19 +61,19 @@ class QuestionAnswerHandler {
         return bestMatch;
     }
 
-    normalizeText(text) {
+    private normalizeText(text: string): string {
         return text.toLowerCase()
             .replace(/[^a-zA-Z0-9 ]/g, ' ')
             .trim();
     }
 
-    escapeRegex(text) {
+    private escapeRegex(text: string): string {
         return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    getQuestionAnswerMap() {
+    getQuestionAnswerMap(): Map<string, string> {
         return this.questionAnswerMap;
     }
 }
 
-module.exports = QuestionAnswerHandler;
+export default QuestionAnswerHandler;
