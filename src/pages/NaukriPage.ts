@@ -21,7 +21,7 @@ export class NaukriPage extends GenericMethods {
         this.appliedJobsCount = 0;
     }
 
-    async NaukriLogin(data: string[]): Promise<void> {
+    public async NaukriLogin(data: string[]): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.sendKeysToElement(this.page, this.locators.EmailID, data[0]);
         await this.sendKeysToElement(this.page, this.locators.Password, data[1]);
@@ -30,7 +30,7 @@ export class NaukriPage extends GenericMethods {
         await this.page.waitForTimeout(3000);
     }
 
-    async NaukriUpdate(): Promise<void> {
+    public async NaukriUpdate(): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.page.goto('https://www.naukri.com/mnjuser/profile');
         await this.page.reload();
@@ -71,14 +71,14 @@ export class NaukriPage extends GenericMethods {
         await this.clickElement(this.page, this.locators.SaveButton);
     }
 
-    async JobApplyFrom_Recommended(): Promise<void> {
+    public async JobApplyFrom_Recommended(): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.clickElement(this.page, this.locators.JobButton);
         await this.waitForPageLoad(this.page);
         await this.JobsApply();
     }
 
-    async JobApplyFromSearch(data: string[]): Promise<void> {
+    public async JobApplyFromSearch(data: string[]): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.scrollToTop(this.page);
         await this.page.waitForTimeout(2000);
@@ -100,7 +100,7 @@ export class NaukriPage extends GenericMethods {
         await this.JobsApply();
     }
 
-    async JobsApply(): Promise<void> {
+    public async JobsApply(): Promise<void> {
         await this.applyJobsOnCurrentPage();
 
         while (true) {
@@ -130,7 +130,7 @@ export class NaukriPage extends GenericMethods {
         }
     }
 
-    async applyJobsOnCurrentPage(): Promise<void> {
+    public async applyJobsOnCurrentPage(): Promise<void> {
         await this.page.waitForTimeout(2000);
         let jobList: any[] = [];
 
@@ -200,7 +200,7 @@ export class NaukriPage extends GenericMethods {
         }
     }
 
-    async handleChatbot(page: Page): Promise<void> {
+    public async handleChatbot(page: Page): Promise<void> {
         await this.waitForPageLoad(page);
 
         if (!(await this.isElementPresent(page, this.locators.chatBotPage))) {
@@ -229,7 +229,7 @@ export class NaukriPage extends GenericMethods {
         console.log('Chatbot handling completed');
     }
 
-    async handleSkipQuestion(page: Page): Promise<boolean> {
+    public async handleSkipQuestion(page: Page): Promise<boolean> {
         if (await this.isElementPresent(page, this.locators.skipThisQues)) {
             await this.clickElement(page, this.locators.skipThisQues);
             await this.page.waitForTimeout(2000);
@@ -238,7 +238,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleAnswers(page: Page): Promise<boolean> {
+    public async handleAnswers(page: Page): Promise<boolean> {
         const dobFields = await page.locator(this.locators.DOBfield.value).all();
         if (dobFields.length > 0) {
             await this.handleDOB(page);
@@ -268,7 +268,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleDOB(page: Page): Promise<void> {
+    public async handleDOB(page: Page): Promise<void> {
         await this.waitForPageLoad(page);
         await this.page.waitForTimeout(1000);
 
@@ -321,7 +321,7 @@ export class NaukriPage extends GenericMethods {
         }
     }
 
-    async handleTextFieldAnswer(page: Page): Promise<boolean> {
+    public async handleTextFieldAnswer(page: Page): Promise<boolean> {
         await this.waitForPageLoad(page);
         await this.page.waitForTimeout(1000);
 
@@ -342,7 +342,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleRadioButtons(page: Page): Promise<boolean> {
+    public async handleRadioButtons(page: Page): Promise<boolean> {
         await this.waitForPageLoad(page);
         await this.page.waitForTimeout(1000);
 
@@ -366,7 +366,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleCheckboxes(page: Page): Promise<boolean> {
+    public async handleCheckboxes(page: Page): Promise<boolean> {
         await this.waitForPageLoad(page);
         const checkboxes = await page.locator(this.locators.checkbox.value).all();
 
@@ -386,7 +386,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleYesButton(page: Page): Promise<boolean> {
+    public async handleYesButton(page: Page): Promise<boolean> {
         await this.waitForPageLoad(page);
         const yesButtons = await page.locator(this.locators.yesButton.value).all();
 
@@ -397,7 +397,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleSearchField(page: Page): Promise<boolean> {
+    public async handleSearchField(page: Page): Promise<boolean> {
         await this.waitForPageLoad(page);
         const searchFields = await page.locator(this.locators.SearchFiled.value).all();
 
@@ -414,7 +414,7 @@ export class NaukriPage extends GenericMethods {
         return false;
     }
 
-    async handleSaveButton(page: Page, skipButtonClicked: boolean, answerProvided: boolean): Promise<void> {
+    public async handleSaveButton(page: Page, skipButtonClicked: boolean, answerProvided: boolean): Promise<void> {
         await this.waitForPageLoad(page);
 
         if (answerProvided && !skipButtonClicked) {
@@ -449,7 +449,7 @@ export class NaukriPage extends GenericMethods {
         }
     }
 
-    async handlePromoPopup(): Promise<void> {
+    public async handlePromoPopup(): Promise<void> {
         try {
             await this.page.waitForTimeout(2000);
 
@@ -520,7 +520,7 @@ export class NaukriPage extends GenericMethods {
         }
     }
 
-    async JobName(page: Page): Promise<void> {
+    public async JobName(page: Page): Promise<void> {
         await this.waitForPageLoad(page);
         const jobTitleElement = await page.locator(this.locators.JobTitle.value).first();
         const jobTitle = await jobTitleElement.textContent();

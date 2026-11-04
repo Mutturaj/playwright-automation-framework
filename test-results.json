@@ -56,214 +56,110 @@
     "shard": null,
     "tags": [],
     "updateSnapshots": "missing",
-    "updateSourceMethod": "patch",
+    "updateSourceMethod": "3way",
     "version": "1.60.0",
-    "workers": 1,
+    "workers": 4,
     "webServer": null
   },
   "suites": [
     {
-      "title": "NaukriTest.spec.ts",
-      "file": "NaukriTest.spec.ts",
+      "title": "practice.spec.js",
+      "file": "practice.spec.js",
       "column": 0,
       "line": 0,
-      "specs": [],
-      "suites": [
+      "specs": [
         {
-          "title": "Naukri Job Application - Muttu",
-          "file": "NaukriTest.spec.ts",
-          "line": 19,
-          "column": 19,
-          "specs": [
+          "title": "Sample Test",
+          "ok": false,
+          "tags": [],
+          "tests": [
             {
-              "title": "Login and update profile",
-              "ok": false,
-              "tags": [],
-              "tests": [
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
                 {
-                  "timeout": 600000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 71061,
+                  "error": {
+                    "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n",
+                    "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:33:53",
+                    "location": {
+                      "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
+                      "column": 53,
+                      "line": 33
+                    },
+                    "snippet": "\u001b[0m \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m  \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'https://www.linkedin.com/company/flipkart/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 34 |\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mscreenshot\n \u001b[90m 35 |\u001b[39m ({ path\u001b[33m:\u001b[39m \u001b[32m\"screenshot.png\"\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m\u001b[0m"
+                  },
+                  "errors": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 59541,
-                      "error": {
-                        "message": "TimeoutError: locator.waitFor: Timeout 50000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//em[@class=\\'icon edit\\']') to be visible\u001b[22m\n",
-                        "stack": "TimeoutError: locator.waitFor: Timeout 50000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//em[@class=\\'icon edit\\']') to be visible\u001b[22m\n\n    at NaukriPage.waitForElement (C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts:69:23)\n    at NaukriPage.clickElement (C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts:86:36)\n    at NaukriPage.NaukriUpdate (C:\\Projects\\PracticeJavascript\\src\\pages\\NaukriPage.ts:69:20)\n    at C:\\Projects\\PracticeJavascript\\tests\\NaukriTest.spec.ts:59:13",
-                        "location": {
-                          "file": "C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts",
-                          "column": 23,
-                          "line": 69
-                        },
-                        "snippet": "\u001b[90m   at \u001b[39m..\\src\\utils\\GenericMethods.ts:69\n\n\u001b[0m \u001b[90m 67 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m`Waiting for element: ${locatorDetails.value}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 68 |\u001b[39m         \u001b[36mconst\u001b[39m locator \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgetLocatorFromDetails(page\u001b[33m,\u001b[39m locatorDetails)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 69 |\u001b[39m         \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mwaitFor({ state\u001b[33m:\u001b[39m \u001b[32m'visible'\u001b[39m\u001b[33m,\u001b[39m timeout\u001b[33m:\u001b[39m \u001b[35m50000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 70 |\u001b[39m         \u001b[36mreturn\u001b[39m locator\u001b[33m;\u001b[39m\n \u001b[90m 71 |\u001b[39m     }\n \u001b[90m 72 |\u001b[39m\u001b[0m"
+                      "location": {
+                        "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
+                        "column": 53,
+                        "line": 33
                       },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts",
-                            "column": 23,
-                            "line": 69
-                          },
-                          "message": "TimeoutError: locator.waitFor: Timeout 50000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//em[@class=\\'icon edit\\']') to be visible\u001b[22m\n\n\n   at ..\\src\\utils\\GenericMethods.ts:69\n\n  67 |         console.log(`Waiting for element: ${locatorDetails.value}`);\n  68 |         const locator = this.getLocatorFromDetails(page, locatorDetails);\n> 69 |         await locator.waitFor({ state: 'visible', timeout: 50000 });\n     |                       ^\n  70 |         return locator;\n  71 |     }\n  72 |\n    at NaukriPage.waitForElement (C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts:69:23)\n    at NaukriPage.clickElement (C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts:86:36)\n    at NaukriPage.NaukriUpdate (C:\\Projects\\PracticeJavascript\\src\\pages\\NaukriPage.ts:69:20)\n    at C:\\Projects\\PracticeJavascript\\tests\\NaukriTest.spec.ts:59:13"
-                        }
-                      ],
-                      "stdout": [
-                        {
-                          "text": "Initialized 39 question-answer mappings for Muttu\n"
-                        },
-                        {
-                          "text": "✅ Initialized Naukri test suite: Muttu\n"
-                        },
-                        {
-                          "text": "🔐 Logging into Naukri...\n"
-                        },
-                        {
-                          "text": "Waiting for element: //input[contains(@placeholder, 'Email ID') or contains(@placeholder, 'Username')]\n"
-                        },
-                        {
-                          "text": "Waiting for element: //input[@type='password' or contains(@placeholder, 'Password') or contains(@placeholder, 'password')]\n"
-                        },
-                        {
-                          "text": "Waiting for element: //button[@type='submit' and text()='Login']\n"
-                        },
-                        {
-                          "text": "📝 Updating Naukri profile...\n"
-                        },
-                        {
-                          "text": "Waiting for element: //em[@class='icon edit']\n"
-                        },
-                        {
-                          "text": "🧹 Closed page\n"
-                        },
-                        {
-                          "text": "🧹 Closed browser context\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-03T13:47:03.859Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\NaukriTest-Naukri-Job-Appl-3353f-tu-Login-and-update-profile-chromium\\test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\NaukriTest-Naukri-Job-Appl-3353f-tu-Login-and-update-profile-chromium\\error-context.md"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\NaukriTest-Naukri-Job-Appl-3353f-tu-Login-and-update-profile-chromium\\error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\NaukriTest-Naukri-Job-Appl-3353f-tu-Login-and-update-profile-chromium\\trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Projects\\PracticeJavascript\\src\\utils\\GenericMethods.ts",
-                        "column": 23,
-                        "line": 69
-                      }
+                      "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n\n\u001b[0m \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m  \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'https://www.linkedin.com/company/flipkart/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 34 |\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mscreenshot\n \u001b[90m 35 |\u001b[39m ({ path\u001b[33m:\u001b[39m \u001b[32m\"screenshot.png\"\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:33:53\u001b[22m"
                     }
                   ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "99c522a46e63ec6773b6-bd83585ef4b64fc65282",
-              "file": "NaukriTest.spec.ts",
-              "line": 54,
-              "column": 13
-            },
-            {
-              "title": "Apply jobs from recommended",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 600000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
+                  "stdout": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-03T13:48:11.581Z",
-                      "annotations": [],
-                      "attachments": []
+                      "text": "This is a sample test\n"
                     }
                   ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "99c522a46e63ec6773b6-f935eb4f94c6002f7454",
-              "file": "NaukriTest.spec.ts",
-              "line": 64,
-              "column": 13
-            },
-            {
-              "title": "Apply jobs from search",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 600000,
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T14:40:10.632Z",
                   "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
+                  "attachments": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-11-03T13:48:11.582Z",
-                      "annotations": [],
-                      "attachments": []
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\trace.zip"
                     }
                   ],
-                  "status": "skipped"
+                  "errorLocation": {
+                    "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
+                    "column": 53,
+                    "line": 33
+                  }
                 }
               ],
-              "id": "99c522a46e63ec6773b6-3f41296896aa66435f56",
-              "file": "NaukriTest.spec.ts",
-              "line": 70,
-              "column": 13
+              "status": "unexpected"
             }
-          ]
+          ],
+          "id": "a82b13b7c3b1c0abddfd-a5ef85f82edae480536b",
+          "file": "practice.spec.js",
+          "line": 3,
+          "column": 1
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-03T13:47:02.591Z",
-    "duration": 69249.347,
+    "startTime": "2026-11-04T14:40:09.072Z",
+    "duration": 76768.96100000013,
     "expected": 0,
-    "skipped": 2,
+    "skipped": 0,
     "unexpected": 1,
     "flaky": 0
   }

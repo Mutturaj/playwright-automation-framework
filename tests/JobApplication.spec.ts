@@ -7,7 +7,21 @@ import DataConfig from '../src/utils/DataConfig';
 /**
  * Combined Job Application Tests (TypeScript)
  * Runs LinkedIn and Naukri tests in parallel for faster execution
+ *
+ * Run configuration:
+ * - When run from IDE: Opens browser in headed mode
+ * - When run from CLI: Uses playwright.config.js settings
  */
+
+// Configure test to run in headed mode when run from IDE
+test.use({
+    headless: false,  // Always show browser
+    launchOptions: {
+        slowMo: 100   // Slow down operations by 100ms for better visibility
+    },
+    video: 'retain-on-failure',  // Record video on failure
+    screenshot: 'only-on-failure'  // Take screenshot on failure
+});
 
 // Get test data from dataset.json
 const testDataArray = DataRead.getTestData();
