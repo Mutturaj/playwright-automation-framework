@@ -27,14 +27,14 @@ export class NaukriPage extends GenericMethods {
         await this.sendKeysToElement(this.page, this.locators.Password, data[1]);
         await this.clickElement(this.page, this.locators.LoginButton);
         await this.waitForPageLoad(this.page);
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(1000);
     }
 
     public async NaukriUpdate(): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.page.goto('https://www.naukri.com/mnjuser/profile');
         await this.page.reload();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(1000);
 
         let isChatbotActive = await this.isElementPresent(this.page, this.locators.chatBotPage);
 
@@ -48,7 +48,7 @@ export class NaukriPage extends GenericMethods {
 
                     if (count > 0) {
                         await closeIcon.first().click();
-                        await this.page.waitForTimeout(2000);
+                        await this.page.waitForTimeout(1000);
 
                         if (!(await this.isElementPresent(this.page, this.locators.chatBotPage))) {
                             isChatbotActive = false;
@@ -67,7 +67,7 @@ export class NaukriPage extends GenericMethods {
         await this.page.waitForTimeout(1000);
         await this.waitForPageLoad(this.page);
         await this.clickElement(this.page, this.locators.EditIcon);
-        await this.page.waitForTimeout(3000);
+        await this.page.waitForTimeout(1000);
         await this.clickElement(this.page, this.locators.SaveButton);
     }
 
@@ -81,7 +81,7 @@ export class NaukriPage extends GenericMethods {
     public async JobApplyFromSearch(data: string[]): Promise<void> {
         await this.waitForPageLoad(this.page);
         await this.scrollToTop(this.page);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(1000);
         await this.handlePromoPopup();
         await this.clickElement(this.page, this.locators.SearchIcon1);
         await this.waitForPageLoad(this.page);
@@ -96,7 +96,7 @@ export class NaukriPage extends GenericMethods {
         await this.sendKeysToElement(this.page, this.locators.Location, data[4]);
         await this.clickElement(this.page, this.locators.SearchIcon2);
         await this.waitForPageLoad(this.page);
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(1000);
         await this.JobsApply();
     }
 
@@ -108,14 +108,14 @@ export class NaukriPage extends GenericMethods {
             let nextPageFound = false;
 
             for (let i = 0; i < pageNumbers.length; i++) {
-                await this.page.waitForTimeout(2000);
+                await this.page.waitForTimeout(1000);
                 const currentPageNumbers = await this.page.locator(this.locators.pageNum.value).all();
                 const classAttr = await currentPageNumbers[i].getAttribute('class');
 
                 if (classAttr && classAttr.includes('styles_selected__')) {
                     if (i + 1 < currentPageNumbers.length) {
                         await currentPageNumbers[i + 1].click();
-                        await this.page.waitForTimeout(2000);
+                        await this.page.waitForTimeout(1000);
                         nextPageFound = true;
                         await this.applyJobsOnCurrentPage();
                         break;
@@ -131,7 +131,7 @@ export class NaukriPage extends GenericMethods {
     }
 
     public async applyJobsOnCurrentPage(): Promise<void> {
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(1000);
         let jobList: any[] = [];
 
         if (await this.isElementPresent(this.page, this.locators.listOfJobs)) {
@@ -149,7 +149,7 @@ export class NaukriPage extends GenericMethods {
 
         for (const job of jobList) {
             await job.click();
-            await this.page.waitForTimeout(3000);
+            await this.page.waitForTimeout(1000);
 
             const pages = context.pages();
             let newPage: Page | null = null;
@@ -177,12 +177,13 @@ export class NaukriPage extends GenericMethods {
                         return;
                     }
 
-                    await this.page.waitForTimeout(2000);
+                    await this.page.waitForTimeout(1000);
                     await this.handleChatbot(newPage);
 
                     if (pages.includes(newPage)) {
-                        console.log('Closing the chatbot window.');
+                        console.log('Job application completed. Closing window and moving to next job.');
                         await newPage.close();
+                        console.log('-------------------------------------------');
                     }
                 } else {
                     const companySiteButtons = await newPage.locator(this.locators.ApplyCompanySite.value).all();
@@ -209,8 +210,11 @@ export class NaukriPage extends GenericMethods {
         }
 
         let isChatbotActive = true;
+        let maxIterations = 20; // Prevent infinite loop
+        let currentIteration = 0;
 
-        while (isChatbotActive) {
+        while (isChatbotActive && currentIteration < maxIterations) {
+            currentIteration++;
             await this.waitForPageLoad(page);
 
             const skipButtonClicked = await this.handleSkipQuestion(page);
@@ -218,15 +222,23 @@ export class NaukriPage extends GenericMethods {
 
             await this.handleSaveButton(page, skipButtonClicked, answerProvided);
 
-            await this.page.waitForTimeout(2000);
+            await this.page.waitForTimeout(1000);
+
+            // Check if chatbot is still present and visible
             isChatbotActive = await this.isElementPresent(page, this.locators.chatBotPage);
 
             if (isChatbotActive) {
-                console.log('Chatbot is still active, processing next question.');
+                console.log(`Chatbot is still active, processing next question (${currentIteration}/${maxIterations}).`);
+            } else {
+                console.log('Chatbot closed - proceeding to next job.');
             }
         }
 
-        console.log('Chatbot handling completed');
+        if (currentIteration >= maxIterations) {
+            console.log('Max chatbot iterations reached - moving to next job.');
+        }
+
+        console.log('Chatbot handling completed - ready for next job');
     }
 
     public async handleSkipQuestion(page: Page): Promise<boolean> {
@@ -357,7 +369,7 @@ export class NaukriPage extends GenericMethods {
                 } else {
                     await firstRadioButton.evaluate(el => (el as HTMLElement).click());
                 }
-                await this.page.waitForTimeout(2000);
+                await this.page.waitForTimeout(1000);
                 return true;
             } catch (error) {
                 console.log(`Error clicking radio button: ${(error as Error).message}`);
@@ -451,7 +463,7 @@ export class NaukriPage extends GenericMethods {
 
     public async handlePromoPopup(): Promise<void> {
         try {
-            await this.page.waitForTimeout(2000);
+            await this.page.waitForTimeout(1000);
 
             const popupOverlay = await this.page.locator("//div[@class='ltLayer open']").all();
 
@@ -476,7 +488,7 @@ export class NaukriPage extends GenericMethods {
                             const closeButton = closeButtons[0];
 
                             try {
-                                await closeButton.click({ timeout: 3000 });
+                                await closeButton.click({ timeout: 1000 });
                                 closed = true;
                                 console.log(`Popup closed with xpath: ${xpath}`);
                                 await this.page.waitForTimeout(1000);

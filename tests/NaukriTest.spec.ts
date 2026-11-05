@@ -34,10 +34,8 @@ test.describe.serial(`Naukri Job Application - ${datasetName}`, () => {
     let context: BrowserContext;
 
     test.beforeAll(async ({ browser }: { browser: Browser }) => {
-        // Create browser context with custom viewport
-        context = await browser.newContext({
-            viewport: { width: 1920, height: 1080 }
-        });
+        // Create browser context with natural window size
+        context = await browser.newContext();
         page = await context.newPage();
 
         // Set dataset name for this test suite
@@ -70,7 +68,8 @@ test.describe.serial(`Naukri Job Application - ${datasetName}`, () => {
         console.log('📝 Updating Naukri profile...');
         await naukriPage.NaukriUpdate();
 
-        console.log('✅ Login and profile update completed');
+        console.log('🔍 Applying for recommended jobs...');
+        await naukriPage.JobApplyFromSearch(data);
     });
 
     test('Apply jobs from recommended', async () => {

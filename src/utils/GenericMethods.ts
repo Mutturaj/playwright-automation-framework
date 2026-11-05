@@ -1,4 +1,4 @@
-import { expect, Page, BrowserContext, Locator } from '@playwright/test';
+import { BrowserContext, expect, Locator, Page } from '@playwright/test';
 import LocatorsDetails from './LocatorsDetails';
 
 class GenericMethods {
@@ -7,7 +7,7 @@ class GenericMethods {
      */
     async waitForPageLoad(page: Page): Promise<void> {
         await page.waitForLoadState('domcontentloaded');
-        await page.waitForLoadState('networkidle', { timeout: 80000 }).catch(() => {
+        await page.waitForLoadState('networkidle', { timeout: 1000 }).catch(() => {
             console.log('Network idle timeout, continuing...');
         });
     }

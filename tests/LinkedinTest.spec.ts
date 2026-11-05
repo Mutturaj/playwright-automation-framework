@@ -1,7 +1,7 @@
-import { test, Browser, Page, BrowserContext } from '@playwright/test';
-import {LinkedinPage} from '../src/pages/LinkedinPage';
-import DataRead from '../src/utils/dataRead';
+import { Browser, BrowserContext, Page, test } from '@playwright/test';
+import { LinkedinPage } from '../src/pages/LinkedinPage';
 import DataConfig from '../src/utils/DataConfig';
+import DataRead from '../src/utils/dataRead';
 
 /**
  * LinkedIn Job Application Tests (TypeScript)
@@ -34,10 +34,8 @@ test.describe(`LinkedIn Job Application - ${datasetName}`, () => {
     let context: BrowserContext;
 
     test.beforeAll(async ({ browser }: { browser: Browser }) => {
-        // Create browser context with custom viewport
-        context = await browser.newContext({
-            viewport: { width: 1920, height: 1080 }
-        });
+        // Create browser context with natural window size
+        context = await browser.newContext();
         page = await context.newPage();
 
         // Set dataset name for this test suite
@@ -80,6 +78,9 @@ test.describe(`LinkedIn Job Application - ${datasetName}`, () => {
     });
 
     test('Apply jobs from recommended collection', async () => {
+        console.log('🔐 Logging into LinkedIn...');
+        await linkedinPage.loginToLinkedIn(data);
+        
         console.log('📍 Navigating to recommended jobs...');
         await page.goto('https://www.linkedin.com/jobs/collections/recommended/');
 

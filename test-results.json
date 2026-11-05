@@ -63,101 +63,189 @@
   },
   "suites": [
     {
-      "title": "practice.spec.js",
-      "file": "practice.spec.js",
+      "title": "LinkedinTest.spec.ts",
+      "file": "LinkedinTest.spec.ts",
       "column": 0,
       "line": 0,
-      "specs": [
+      "specs": [],
+      "suites": [
         {
-          "title": "Sample Test",
-          "ok": false,
-          "tags": [],
-          "tests": [
+          "title": "LinkedIn Job Application - Muttu",
+          "file": "LinkedinTest.spec.ts",
+          "line": 31,
+          "column": 6,
+          "specs": [
             {
-              "timeout": 600000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
+              "title": "Apply jobs from recommended collection",
+              "ok": false,
+              "tags": [],
+              "tests": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "failed",
-                  "duration": 71061,
-                  "error": {
-                    "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n",
-                    "stack": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:33:53",
-                    "location": {
-                      "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
-                      "column": 53,
-                      "line": 33
-                    },
-                    "snippet": "\u001b[0m \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m  \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'https://www.linkedin.com/company/flipkart/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 34 |\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mscreenshot\n \u001b[90m 35 |\u001b[39m ({ path\u001b[33m:\u001b[39m \u001b[32m\"screenshot.png\"\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m\u001b[0m"
-                  },
-                  "errors": [
-                    {
-                      "location": {
-                        "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
-                        "column": 53,
-                        "line": 33
-                      },
-                      "message": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('//a[@aria-label=\\'LinkedIn\\']')\u001b[22m\n\n\n\u001b[0m \u001b[90m 31 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 32 |\u001b[39m  \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m\"//a[@aria-label='LinkedIn']\"\u001b[39m)\u001b[33m.\u001b[39mfill(\u001b[32m'https://www.linkedin.com/company/flipkart/'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 34 |\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mscreenshot\n \u001b[90m 35 |\u001b[39m ({ path\u001b[33m:\u001b[39m \u001b[32m\"screenshot.png\"\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js:33:53\u001b[22m"
-                    }
-                  ],
-                  "stdout": [
-                    {
-                      "text": "This is a sample test\n"
-                    }
-                  ],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-11-04T14:40:10.632Z",
+                  "timeout": 600000,
                   "annotations": [],
-                  "attachments": [
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
                     {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\test-failed-1.png"
-                    },
-                    {
-                      "name": "video",
-                      "contentType": "video/webm",
-                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\video.webm"
-                    },
-                    {
-                      "name": "error-context",
-                      "contentType": "text/markdown",
-                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\error-context.md"
-                    },
-                    {
-                      "name": "trace",
-                      "contentType": "application/zip",
-                      "path": "C:\\Projects\\PracticeJavascript\\test-results\\practice-Sample-Test-chromium\\trace.zip"
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 82968,
+                      "error": {
+                        "message": "Error: page.waitForTimeout: Target page, context or browser has been closed",
+                        "stack": "Error: page.waitForTimeout: Target page, context or browser has been closed\n    at LinkedinPage.processJobList (C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts:222:25)\n    at LinkedinPage.applyForJobs (C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts:180:17)\n    at C:\\Projects\\PracticeJavascript\\tests\\LinkedinTest.spec.ts:88:9",
+                        "location": {
+                          "file": "C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts",
+                          "column": 25,
+                          "line": 222
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\src\\pages\\LinkedinPage.ts:222\n\n\u001b[0m \u001b[90m 220 |\u001b[39m             }\n \u001b[90m 221 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 222 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m1000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 223 |\u001b[39m     }\n \u001b[90m 224 |\u001b[39m\n \u001b[90m 225 |\u001b[39m     \u001b[36masync\u001b[39m scrollForJobs(maxScrollAttempts\u001b[33m:\u001b[39m number)\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[33mboolean\u001b[39m\u001b[33m>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts",
+                            "column": 25,
+                            "line": 222
+                          },
+                          "message": "Error: page.waitForTimeout: Target page, context or browser has been closed\n\n\u001b[90m   at \u001b[39m..\\src\\pages\\LinkedinPage.ts:222\n\n\u001b[0m \u001b[90m 220 |\u001b[39m             }\n \u001b[90m 221 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 222 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m1000\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 223 |\u001b[39m     }\n \u001b[90m 224 |\u001b[39m\n \u001b[90m 225 |\u001b[39m     \u001b[36masync\u001b[39m scrollForJobs(maxScrollAttempts\u001b[33m:\u001b[39m number)\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[33mboolean\u001b[39m\u001b[33m>\u001b[39m {\u001b[0m\n\u001b[2m    at LinkedinPage.processJobList (C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts:222:25)\u001b[22m\n\u001b[2m    at LinkedinPage.applyForJobs (C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts:180:17)\u001b[22m\n\u001b[2m    at C:\\Projects\\PracticeJavascript\\tests\\LinkedinTest.spec.ts:88:9\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Initialized 39 question-answer mappings for Muttu\n"
+                        },
+                        {
+                          "text": "✅ Initialized LinkedIn test suite: Muttu\n"
+                        },
+                        {
+                          "text": "🔐 Logging into LinkedIn...\n"
+                        },
+                        {
+                          "text": "Attempting to login with email: mutturaja1996@gmail.com\n"
+                        },
+                        {
+                          "text": "Network idle timeout, continuing...\n"
+                        },
+                        {
+                          "text": "Entering email...\n"
+                        },
+                        {
+                          "text": "✓ Email entered\n"
+                        },
+                        {
+                          "text": "Entering password...\n"
+                        },
+                        {
+                          "text": "✓ Password entered\n"
+                        },
+                        {
+                          "text": "Clicking Sign In button...\n"
+                        },
+                        {
+                          "text": "✓ Sign In button clicked\n"
+                        },
+                        {
+                          "text": "Network idle timeout during login, continuing...\n"
+                        },
+                        {
+                          "text": "=== Login Process Completed ===\n"
+                        },
+                        {
+                          "text": "📍 Navigating to recommended jobs...\n"
+                        },
+                        {
+                          "text": "📝 Applying for recommended jobs...\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.count: SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='You've reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']' is not a valid XPath expression.\n    at Object.queryAll (<anonymous>:6017:25)\n    at InjectedScript._queryEngineAll (<anonymous>:6730:49)\n    at InjectedScript.querySelectorAll (<anonymous>:6717:30)\n    at eval (eval at evaluate (:302:30), <anonymous>:2:37)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n"
+                        },
+                        {
+                          "text": "ElementClickInterceptedException caught, moving to the next job: locator.click: Target page, context or browser has been closed\n"
+                        },
+                        {
+                          "text": "🧹 Closed page\n"
+                        },
+                        {
+                          "text": "🧹 Closed browser context\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-05T02:00:49.949Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\LinkedinTest-LinkedIn-Job--d74c6-from-recommended-collection-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\LinkedinTest-LinkedIn-Job--d74c6-from-recommended-collection-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Projects\\PracticeJavascript\\test-results\\LinkedinTest-LinkedIn-Job--d74c6-from-recommended-collection-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Projects\\PracticeJavascript\\src\\pages\\LinkedinPage.ts",
+                        "column": 25,
+                        "line": 222
+                      }
                     }
                   ],
-                  "errorLocation": {
-                    "file": "C:\\Projects\\PracticeJavascript\\tests\\practice.spec.js",
-                    "column": 53,
-                    "line": 33
-                  }
+                  "status": "unexpected"
                 }
               ],
-              "status": "unexpected"
+              "id": "80335b167885da2ba7cb-b7c0ade2f603c3649e60",
+              "file": "LinkedinTest.spec.ts",
+              "line": 80,
+              "column": 9
             }
-          ],
-          "id": "a82b13b7c3b1c0abddfd-a5ef85f82edae480536b",
-          "file": "practice.spec.js",
-          "line": 3,
-          "column": 1
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-04T14:40:09.072Z",
-    "duration": 76768.96100000013,
+    "startTime": "2026-11-05T02:00:47.618Z",
+    "duration": 99263.08700000006,
     "expected": 0,
     "skipped": 0,
     "unexpected": 1,

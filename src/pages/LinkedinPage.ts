@@ -20,15 +20,13 @@ export class LinkedinPage extends GenericMethods {
     }
 
     async loginToLinkedIn(data: string[]): Promise<void> {
-        console.log('\n=== Starting LinkedIn Login ===');
         console.log(`Attempting to login with email: ${data[0]}`);
-
         try {
             // Wait for page to load
-            await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {
+            await this.page.waitForLoadState('networkidle', { timeout: 2000 }).catch(() => {
                 console.log('Network idle timeout, continuing...');
             });
-            await this.page.waitForTimeout(3000);
+            await this.page.waitForTimeout(1000);
 
             // Check if already logged in
             const currentUrl = this.page.url();
@@ -56,13 +54,12 @@ export class LinkedinPage extends GenericMethods {
             console.log('✓ Sign In button clicked');
 
             // Wait for navigation after login
-            await this.page.waitForLoadState('networkidle', { timeout: 40000 }).catch(() => {
+            await this.page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => {
                 console.log('Network idle timeout during login, continuing...');
             });
             await this.page.waitForTimeout(500);
 
             console.log('=== Login Process Completed ===');
-            console.log(`Current URL after login: ${this.page.url()}\n`);
 
         } catch (error) {
             console.log('\n=== DEBUG INFO ON ERROR ===');

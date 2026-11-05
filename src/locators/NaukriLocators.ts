@@ -9,182 +9,206 @@ export class NaukriLocators {
     // ==================== LOGIN LOCATORS ====================
     readonly EmailID = new LocatorsDetails(
         'xpath',
-        "//input[contains(@placeholder, 'Email ID') or contains(@placeholder, 'Username')]",
-        'Email ID Input'
+        "//input[@id='usernameField']",
+        'Enter Email'
     );
 
     readonly Password = new LocatorsDetails(
         'xpath',
-        "//input[@type='password' or contains(@placeholder, 'Password') or contains(@placeholder, 'password')]",
-        'Password Input'
+        "//input[@id='passwordField']",
+        'Password'
     );
 
     readonly LoginButton = new LocatorsDetails(
         'xpath',
-        "//button[@type='submit' and text()='Login']",
+        "//button[.='Login']",
         'Login Button'
     );
 
     // ==================== PROFILE UPDATE LOCATORS ====================
+    readonly ViewProfile = new LocatorsDetails(
+        'xpath',
+        "//a[text()='View']",
+        'View Profile button'
+    );
+
     readonly EditIcon = new LocatorsDetails(
         'xpath',
-        "//em[@class='icon edit']",
+        "//span[text()='Resume headline']/following-sibling::span[@class='edit icon' and .='editOneTheme']",
         'Edit Icon'
     );
 
     readonly SaveButton = new LocatorsDetails(
         'xpath',
-        "//button[contains(@class,'updateProfile')]",
-        'Save Button'
+        "//button[.='Save']",
+        'Save button'
+    );
+
+    readonly SuccessMessage = new LocatorsDetails(
+        'xpath',
+        "//p[.='Success']",
+        'Success Message'
     );
 
     // ==================== NAVIGATION LOCATORS ====================
     readonly JobButton = new LocatorsDetails(
         'xpath',
-        "//a[text()='Jobs']",
+        "//div[.='Jobs']",
         'Job Button'
     );
 
     readonly SearchIcon1 = new LocatorsDetails(
         'xpath',
-        "//span[@class='nI-gNb-sb__placeholder']",
-        'Search Icon 1'
+        "//button[@aria-label='Search jobs here']",
+        'Search Icon'
     );
 
     readonly SearchIcon2 = new LocatorsDetails(
         'xpath',
-        "//button[text()='Search']",
-        'Search Icon 2'
+        "//span[.='Search']",
+        'Search Icon'
     );
 
     // ==================== SEARCH FILTER LOCATORS ====================
     readonly Designation = new LocatorsDetails(
         'xpath',
-        "//input[@placeholder='Enter keyword / designation / companies']",
-        'Designation Input'
+        "//input[@placeholder=\"Enter keyword / designation / companies\"]",
+        'Job Search'
     );
 
     readonly Location = new LocatorsDetails(
         'xpath',
-        "//input[@placeholder='Enter location']",
-        'Location Input'
+        "//input[@placeholder=\"Enter location\"]",
+        'Location Text Filed'
     );
 
     readonly ExperienceButton = new LocatorsDetails(
         'xpath',
-        "//div[@class='dropdownMainContainer']//span[text()='Experience']",
-        'Experience Button'
+        "//input[@id='experienceDD']",
+        'Experience '
     );
 
     // ==================== JOB LIST LOCATORS ====================
     readonly listOfJobs = new LocatorsDetails(
         'xpath',
-        "//div[@class='cust-job-tuple layout-wrapper lay-2 sjw__tuple ']",
+        "//span[@class='ellipsis dspIB valignM    ' and contains(text(),'Yrs')]",
         'List of Jobs'
     );
 
     readonly listOfJobsFromSearch = new LocatorsDetails(
         'xpath',
-        "//article[@class='jobTuple bgWhite br4 mb-8']",
-        'List of Jobs From Search'
+        "//span[@class='ni-job-tuple-icon ni-job-tuple-icon-srp-experience exp']//span",
+        'Job List from Search'
     );
 
     readonly ApplyButton = new LocatorsDetails(
         'xpath',
-        "//button[text()='Apply']",
+        "//div[@class='styles_jhc__apply-button-container__5Bqnb']/button[.='Apply']",
         'Apply Button'
     );
 
     readonly ApplyCompanySite = new LocatorsDetails(
         'xpath',
-        "//button[text()='Apply on company site']",
-        'Apply on Company Site Button'
+        "//div[@class='styles_jhc__apply-button-container__5Bqnb']/button[.='Apply on company site']",
+        'Apply On Company Site Button'
     );
 
     readonly JobTitle = new LocatorsDetails(
         'xpath',
-        "//h1[@class='jd-header-title']",
-        'Job Title'
+        "//h1[@class=\"styles_jd-header-title__rZwM1\"]",
+        'Job Name'
     );
 
     // ==================== PAGINATION LOCATORS ====================
     readonly pageNum = new LocatorsDetails(
         'xpath',
-        "//div[@class='styles_pagination__oZVUR']//a",
-        'Page Numbers'
+        "//div[@class='styles_pages__v1rAK']/a",
+        'Page nums'
     );
 
     // ==================== CHATBOT LOCATORS ====================
+    readonly closeIcon = new LocatorsDetails(
+        'xpath',
+        "//div[@class='crossIcon chatBot chatBot-ic-cross']",
+        'Cross Icon'
+    );
+
+    readonly premiumCloseIcon = new LocatorsDetails(
+        'xpath',
+        "//div[contains(@class,'profileUpdatedProLayer')]//div[@class='crossLayer']",
+        'Close Icon on Premium-popup'
+    );
+
     readonly chatBotPage = new LocatorsDetails(
         'xpath',
-        "//div[@class='chatBot chatBot-panel']",
-        'Chatbot Page'
+        "//div[@class='chatbot_Drawer chatbot_right']",
+        'Chat bot page'
     );
 
     readonly chatBotQuestion = new LocatorsDetails(
         'xpath',
-        "//p[@class='msg-text']",
-        'Chatbot Question'
+        "//div[@class='botMsg msg ']//span",
+        'Chat Bot Question'
     );
 
     readonly answerTextFiled = new LocatorsDetails(
         'xpath',
-        "//input[@type='text' and @class='inputBox']",
-        'Answer Text Field'
+        "//div[@class='textArea' and @data-placeholder='Type message here...']",
+        'Input text filed'
     );
 
     readonly RadioButtons = new LocatorsDetails(
         'xpath',
-        "//input[@type='radio']",
-        'Radio Buttons'
+        "//div[@class='ssrc__radio-btn-container']/label",
+        'Radio buttons'
     );
 
     readonly checkbox = new LocatorsDetails(
         'xpath',
-        "//input[@type='checkbox']",
-        'Checkbox'
+        "//div[@class='multicheckboxes-container']//label[1]",
+        'Check box'
     );
 
     readonly yesButton = new LocatorsDetails(
         'xpath',
-        "//button[text()='Yes']",
-        'Yes Button'
+        "//div[@class='chatbot_Chip chipInRow chipItem']//span[text()='Yes']",
+        'Yes button'
     );
 
     readonly SearchFiled = new LocatorsDetails(
         'xpath',
-        "//input[@type='search']",
-        'Search Field'
+        "//div[@class='ssc__input-container']/input",
+        'Search Textfield'
     );
 
     readonly suggestionList = new LocatorsDetails(
         'xpath',
-        "//li[@class='suggestion']",
-        'Suggestion List'
+        "//div[@id='ssc__option_0']//div[@class='ssc__heading']",
+        'Suggestion list'
     );
 
     readonly saveButtonContainer = new LocatorsDetails(
         'xpath',
-        "//div[@class='questionWrap']",
-        'Save Button Container'
+        "//div[starts-with(@id, 'sendMsg__') and contains(@class, 'send') and not(contains(@class, 'disabled'))]",
+        'Save Button'
     );
 
     readonly skipThisQues = new LocatorsDetails(
         'xpath',
-        "//a[text()='Skip this question']",
-        'Skip This Question'
+        "//span[text()='Skip this question']",
+        'Skip this button'
     );
 
     readonly DOBfield = new LocatorsDetails(
         'xpath',
-        "//input[@type='tel']",
-        'DOB Field'
+        "//div[@class='dob__input-container']//input[contains(@id, 'dobInput')]",
+        'DOB Filed'
     );
 
     // ==================== LIMIT REACHED LOCATOR ====================
     readonly ReachedMaxLimit = new LocatorsDetails(
         'xpath',
-        "//span[text()='You have reached the maximum application']",
+        "//span[.='There was an error while processing your request, please try again later']",
         'Reached Max Limit'
     );
 }

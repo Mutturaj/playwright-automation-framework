@@ -8,26 +8,38 @@ export class LinkedinLocators {
     // ==================== LOGIN LOCATORS ====================
     readonly EmailID = new LocatorsDetails(
         'xpath',
-        "//input[@name='session_key']",
-        'Email ID Input'
+        "//input[@type='email' and @autocomplete='username webauthn']",
+        'EmailID Input'
     );
 
     readonly Password = new LocatorsDetails(
         'xpath',
-        "//input[@name='session_password']",
+        "(//button[@aria-label='Show password']/ancestor::div[2]//input[@type='password'])[2]",
         'Password Input'
     );
 
     readonly SignInButton = new LocatorsDetails(
         'xpath',
-        "//button[@type='submit']",
+        "(//button[.//span[normalize-space()='Sign in']])[2]",
         'Sign in Button'
+    );
+
+    readonly LoginWithEmail = new LocatorsDetails(
+        'xpath',
+        "//a[@class=\"sign-in-form__sign-in-cta my-2 py-1 btn-md btn-secondary block min-h-[40px] babybear:w-full\"]",
+        'Login with Email button'
+    );
+
+    readonly AgreeAndReJoinButton = new LocatorsDetails(
+        'xpath',
+        "//button[@value='Agree & Join']",
+        'Agree and Re-Join Button'
     );
 
     // ==================== NAVIGATION LOCATORS ====================
     readonly JobIcon = new LocatorsDetails(
         'xpath',
-        "//*[@id='job-medium']",
+        "//li-icon[@type='job']",
         'Job Icon'
     );
 
@@ -43,11 +55,23 @@ export class LinkedinLocators {
         'View Jobs Button'
     );
 
+    readonly ShowAllButton = new LocatorsDetails(
+        'xpath',
+        "//div[@class='discovery-templates-vertical-list__footer']/a[@href='https://www.linkedin.com/jobs/collections/recommended?discover=recommended&discoveryOrigin=JOBS_HOME_JYMBII']",
+        'Show All Button'
+    );
+
     // ==================== SEARCH LOCATORS ====================
+    readonly SearchIcon = new LocatorsDetails(
+        'xpath',
+        "//*[name()='svg' and @class='jobs-search-box__search-icon--custom']",
+        'Search Icon'
+    );
+
     readonly TitleOfJob = new LocatorsDetails(
         'xpath',
-        "//input[@placeholder='Describe the job you want']",
-        'Title of the Job Input'
+        "//input[@data-testid=\"typeahead-input\"]",
+        'Job search icon'
     );
 
     readonly LocationOfJob = new LocatorsDetails(
@@ -113,7 +137,7 @@ export class LinkedinLocators {
     );
 
     readonly listOfJobsFrame = new LocatorsDetails(
-        'cssselector',
+        'cssSelector',
         '.scaffold-layout__list .jobs-search-results-list',
         'List of Jobs Frame'
     );
@@ -124,10 +148,22 @@ export class LinkedinLocators {
         'List of Pages'
     );
 
+    readonly dot = new LocatorsDetails(
+        'xpath',
+        "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]",
+        'Dots in the list of the pages'
+    );
+
     readonly nextPage1 = new LocatorsDetails(
         'xpath',
         "//button[@aria-label='View next page']",
         'Next Button'
+    );
+
+    readonly AppliedText = new LocatorsDetails(
+        'xpath',
+        "//li[contains(@class, 'job-card-container__footer-item') and contains(@class, 'job-card-container__footer-job-state') and contains(., 'Applied')]",
+        'Applied Text'
     );
 
     // ==================== APPLICATION BUTTON LOCATORS ====================
@@ -210,6 +246,12 @@ export class LinkedinLocators {
         'All Questions'
     );
 
+    readonly Question3 = new LocatorsDetails(
+        'xpath',
+        "//label[contains(@class, 'fb-dash-form-element__label')]//span[contains(., 'Location (city)')][1]",
+        'Email or Location text'
+    );
+
     readonly cityName = new LocatorsDetails(
         'xpath',
         "//input[contains(@id, 'location-GEO-LOCATION') or contains(@id, 'city-HOME-CITY')]",
@@ -227,6 +269,18 @@ export class LinkedinLocators {
         'xpath',
         ".//input[@type='radio' and @value='Yes']",
         'Radio button'
+    );
+
+    readonly radioButtons1 = new LocatorsDetails(
+        'xpath',
+        "//div[@class='fb-text-selectable__option display-flex']//input[@type='radio']",
+        'List of Radio buttons'
+    );
+
+    readonly radioButtons2 = new LocatorsDetails(
+        'xpath',
+        "//div[@class='fb-text-selectable__option display-flex']//input[@type='radio']",
+        'Radio buttons'
     );
 
     readonly radioGroups = new LocatorsDetails(
