@@ -75,71 +75,51 @@ export class LinkedinPage extends GenericMethods {
 
     async navigateToJobs(): Promise<void> {
         await this.waitForPageLoad(this.page);
-        console.log('=== Navigating to Jobs ===');
+        await this.page.waitForTimeout(4000);
         await this.page.goto('https://www.linkedin.com/jobs/');
-        await this.waitForPageLoad(this.page);
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
     }
 
     async navigateToNotification(): Promise<void> {
         await this.waitForPageLoad(this.page);
-        const notificationIcon = await this.findElement(this.page, this.locators.NotificationIcon);
-        if (notificationIcon) {
-            await notificationIcon.click();
-            await this.waitForPageLoad(this.page);
-            await this.page.waitForTimeout(1000);
 
-            const viewJobsButtons = await this.page.locator(this.locators.viewJobsButton.value).all();
-            if (viewJobsButtons.length > 0) {
-                await viewJobsButtons[0].click();
+        // Remove disabled and aria-hidden attributes
+        const notificationIcon = this.page.locator(this.locators.NotificationIcon.value).first();
+        await notificationIcon.evaluate((el) => {
+            el.removeAttribute('disabled');
+            el.removeAttribute('aria-hidden');
+        });
+
+        await this.clickElement(this.page, this.locators.NotificationIcon);
+        await this.waitForPageLoad(this.page);
+        await this.page.waitForTimeout(1000);
+
+        const viewJobsButtons = await this.page.locator(this.locators.viewJobsButton.value).all();
+        for (let i = 0; i < viewJobsButtons.length; i++) {
+            if (i === 0) {
+                await viewJobsButtons[i].click();
                 await this.waitForPageLoad(this.page);
-                await this.page.waitForTimeout(1000);
+                await this.page.waitForTimeout(2000);
+                break;
             }
         }
     }
 
     async searchForJobs(data: string[]): Promise<void> {
         await this.waitForPageLoad(this.page);
-        await this.page.waitForTimeout(500);
 
-        console.log('=== Searching for Jobs ===');
+        // Remove disabled and aria-hidden attributes from title field
+        const titleElement = this.page.locator(this.locators.TitleOfJob.value).first();
+        await titleElement.evaluate((el) => {
+            el.removeAttribute('disabled');
+            el.removeAttribute('aria-hidden');
+        });
 
-        const titleLocators = [
-            this.locators.TitleOfJob
-        ];
-
-        let titleEntered = false;
-        let titleElement: Locator | null = null;
-
-        for (const titleLocator of titleLocators) {
-            try {
-                if (await this.isElementPresent(this.page, titleLocator)) {
-                    console.log(`Found job title search field using: ${titleLocator.name}`);
-                    titleElement = await this.waitForElement(this.page, titleLocator);
-                    await titleElement.clear();
-                    await titleElement.fill(data[2]);
-                    console.log(`Successfully entered job title: ${data[2]}`);
-                    titleEntered = true;
-                    break;
-                }
-            } catch (e) {
-                console.log(`Failed with locator: ${titleLocator.name} - ${(e as Error).message}`);
-                continue;
-            }
-        }
-
-        if (!titleEntered) {
-            throw new Error('Could not find job title search field with any locator');
-        }
-
-        await this.page.waitForTimeout(500);
+        await this.sendKeysToElement(this.page, this.locators.TitleOfJob, data[2]);
+        await this.page.waitForTimeout(2000);
 
         // Press Enter to search
-        if (titleElement) {
-            await titleElement.press('Enter');
-            console.log('Pressed ENTER to search for jobs');
-        }
-
+        await titleElement.press('Enter');
         await this.waitForPageLoad(this.page);
         await this.page.waitForTimeout(2000);
     }
@@ -195,14 +175,17 @@ export class LinkedinPage extends GenericMethods {
         const jobsCount = await jobsLocator.count();
 
         for (let i = 0; i < jobsCount; i++) {
+            const job = jobsLocator.nth(i);
             try {
-                const job = jobsLocator.nth(i);
+                console.log(`Processing job ${i + 1} of ${jobsCount}`);
+                console.log('Going to scroll');
                 await job.scrollIntoViewIfNeeded();
                 await job.click();
                 await this.page.waitForTimeout(1000);
 
-                const reachedMaxLimit = await this.page.locator(this.locators.reachedMaxLimit.value).count();
-                if (reachedMaxLimit > 0) {
+                // Check if reached max limit
+                const reachedMaxLimitElements = await this.page.locator(this.locators.reachedMaxLimit.value).all();
+                if (reachedMaxLimitElements.length > 0) {
                     console.log('Reached Max Limit so stopped the JOB Application Process');
                     throw new Error('Easy Apply limit reached');
                 }
@@ -211,15 +194,16 @@ export class LinkedinPage extends GenericMethods {
                     await this.handleEasyApply(data);
                 } else {
                     await this.markJobAsApplied(job);
+                    i--; // Recheck the updated list
                 }
             } catch (error) {
                 if ((error as Error).message.includes('Easy Apply limit reached')) {
                     throw error;
                 }
-                console.log(`ElementClickInterceptedException caught, moving to the next job: ${(error as Error).message}`);
+                console.log(`ElementClickInterceptedException caught, moving to the next job. Error: ${(error as Error).message}`);
             }
         }
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(4000);
     }
 
     async scrollForJobs(maxScrollAttempts: number): Promise<boolean> {
@@ -229,13 +213,16 @@ export class LinkedinPage extends GenericMethods {
 
         while (!jobsFound && !pagesFound && scrollAttempts < maxScrollAttempts) {
             await this.page.evaluate(() => {
-                const element = document.querySelector('.scaffold-layout__list');
-                if (element) element.scrollTop += 450;
+                window.scrollBy(0, 450);
             });
             await this.waitForPageLoad(this.page);
 
-            jobsFound = (await this.page.locator(this.locators.listOfJobs.value).count()) > 0;
-            pagesFound = (await this.page.locator(this.locators.listOfPages.value).count()) > 0;
+            const jobs = await this.page.locator(this.locators.listOfJobs.value).all();
+            jobsFound = jobs.length > 0;
+
+            const pages = await this.page.locator(this.locators.listOfPages.value).all();
+            pagesFound = pages.length > 0;
+
             scrollAttempts++;
         }
 
@@ -266,6 +253,12 @@ export class LinkedinPage extends GenericMethods {
     }
 
     async handleEasyApply(data: string[]): Promise<void> {
+        // Remove aria-hidden attribute from Easy Apply button
+        const easyApplyBtn = this.page.locator(this.locators.easyApplyButton.value).first();
+        await easyApplyBtn.evaluate((el) => {
+            el.removeAttribute('aria-hidden');
+        }).catch(() => { });
+
         await this.page.waitForTimeout(1000);
         await this.ClickEasyApplyButtonORContinueButton();
         await this.handleJobApplicationProcess(data);
@@ -274,12 +267,13 @@ export class LinkedinPage extends GenericMethods {
     async ClickEasyApplyButtonORContinueButton(): Promise<void> {
         const continueButtons = await this.page.locator(this.locators.continueButton.value).all();
         if (continueButtons.length > 0) {
-            await continueButtons[0].click();
+            await this.waitForElement(this.page, this.locators.continueButton);
+            await this.clickElement(this.page, this.locators.continueButton);
         } else {
-            const easyApplyButton = await this.waitForElement(this.page, this.locators.easyApplyButton);
-            await easyApplyButton.click();
+            await this.waitForElement(this.page, this.locators.easyApplyButton);
+            await this.clickElement(this.page, this.locators.easyApplyButton);
         }
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
     }
 
     async handleJobApplicationProcess(data: string[]): Promise<void> {
@@ -327,17 +321,30 @@ export class LinkedinPage extends GenericMethods {
         await this.waitForPageLoad(this.page);
 
         if (applicationSubmitted) {
-            await this.page.waitForTimeout(2000);
+            await this.page.waitForTimeout(3000);
 
             if (await this.isElementPresent(this.page, this.locators.closeIcon)) {
+                await this.waitForElement(this.page, this.locators.closeIcon);
+
+                // Remove aria-hidden attribute
+                const closeIcon = this.page.locator(this.locators.closeIcon.value).first();
+                await closeIcon.evaluate((el) => {
+                    el.removeAttribute('aria-hidden');
+                }).catch(() => { });
+
                 await this.clickElement(this.page, this.locators.closeIcon);
                 console.log('Clicked Close icon, exiting further actions.');
                 return;
             }
 
             if (await this.isElementPresent(this.page, this.locators.DoneButton)) {
+                await this.waitForElement(this.page, this.locators.DoneButton);
                 await this.clickElement(this.page, this.locators.DoneButton);
                 console.log('Clicked Done button');
+            } else {
+                await this.waitForElement(this.page, this.locators.DoneButton);
+                console.log('Done button not found. Trying to find and click it once again.');
+                await this.clickElement(this.page, this.locators.DoneButton);
             }
         }
     }
@@ -345,8 +352,15 @@ export class LinkedinPage extends GenericMethods {
     async nextButton(): Promise<boolean> {
         const nextButtons = await this.page.locator(this.locators.nextButton.value).all();
         if (nextButtons.length > 0) {
-            await nextButtons[0].scrollIntoViewIfNeeded();
-            await nextButtons[0].click();
+            const nextButton = nextButtons[0];
+            const isDisplayed = await nextButton.isVisible();
+            const isEnabled = await nextButton.isEnabled();
+            console.log(`Button Displayed: ${isDisplayed}`);
+            console.log(`Button Enabled: ${isEnabled}`);
+
+            await nextButton.scrollIntoViewIfNeeded();
+            await this.waitForElement(this.page, this.locators.nextButton);
+            await this.clickElement(this.page, this.locators.nextButton);
             return true;
         }
         return false;
@@ -355,6 +369,9 @@ export class LinkedinPage extends GenericMethods {
     async handleNextSection(data: string[]): Promise<void> {
         const nextButtons = await this.page.locator(this.locators.nextButton.value).all();
         if (nextButtons.length > 0) {
+            const nextBtn = nextButtons[0];
+            await nextBtn.scrollIntoViewIfNeeded();
+
             await this.fillTextQuestions();
             await this.EnterCityName();
             await this.handleRadioButtons();
@@ -362,6 +379,8 @@ export class LinkedinPage extends GenericMethods {
             await this.handleCheckboxes();
             await this.JoiningDate();
             await this.textAreaField(data);
+
+            await nextBtn.scrollIntoViewIfNeeded();
         }
     }
 
@@ -375,8 +394,12 @@ export class LinkedinPage extends GenericMethods {
             await this.handleCheckboxes();
             await this.JoiningDate();
             await this.textAreaField(data);
+
+            const reviewBtn = reviewButtons[0];
+            await reviewBtn.scrollIntoViewIfNeeded();
+            await this.waitForElement(this.page, this.locators.reviewButton);
             await this.clickElement(this.page, this.locators.reviewButton);
-            await this.page.waitForTimeout(1000);
+            await this.page.waitForTimeout(5000);
         }
     }
 
